@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# project
+.github
+db.json
+.deploy*/
+node_modules/
+public/
+themes/
