@@ -54,7 +54,7 @@ WARNING: this script is deprecated, please see git-completion.zsh
 但是Git并没有兼容zsh，所以还是得用回bash。解决办法如下：
 终端 --> 偏好设置 --> 通用 --> Shell的打开方式，选中【命令（完整的路径）】，设置为：/bin/bash
 
-![](/images/macOS/git_autoCommand/01.png)
+![](/images/macOS/git_auto_cmd/01.png)
 
 
 
