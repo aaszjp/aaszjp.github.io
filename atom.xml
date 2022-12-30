@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-12-28T15:39:59.154Z</updated>
+  <updated>2022-12-30T07:50:24.648Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GIT 自动补全命令,分支名 以及 高亮显示当前分支</title>
+    <link href="http://example.com/2022/12/30/macOS/git_autoCommand/"/>
+    <id>http://example.com/2022/12/30/macOS/git_autoCommand/</id>
+    <published>2022-12-29T18:27:36.000Z</published>
+    <updated>2022-12-30T07:50:24.648Z</updated>
+    
+    <content type="html"><![CDATA[<p>【注】<code>~/.bashrc</code> 是Linux的，对应到Mac OSX 是 <code>~/.bash_profile</code> ，看网上的教程要注意区分和替换</p><h3 id="1、执行以下命令，克隆官方git库，然后找到两个关键文件"><a href="#1、执行以下命令，克隆官方git库，然后找到两个关键文件" class="headerlink" title="1、执行以下命令，克隆官方git库，然后找到两个关键文件"></a>1、执行以下命令，克隆官方git库，然后找到两个关键文件</h3><p><code>git clone git@github.com:git/git.git</code></p><ul><li><code>contrib/completion/git-completion.bash</code> 自动补全</li><li><code>contrib/completion/git-prompt.sh</code> 高亮显示当前分支名称</li></ul><h3 id="2、执行以下命令，将两个文件复制到用户目录，并设置隐藏"><a href="#2、执行以下命令，将两个文件复制到用户目录，并设置隐藏" class="headerlink" title="2、执行以下命令，将两个文件复制到用户目录，并设置隐藏"></a>2、执行以下命令，将两个文件复制到用户目录，并设置隐藏</h3><p><code>cp git-completion.bash ~/.git-completion.bash</code><br><code>cp git-prompt.sh ~/.git-prompt.sh</code></p><h3 id="3、配置-bash-profile-文件，没有该文件就新增，然后加入以下内容"><a href="#3、配置-bash-profile-文件，没有该文件就新增，然后加入以下内容" class="headerlink" title="3、配置 ~/.bash_profile 文件，没有该文件就新增，然后加入以下内容"></a>3、配置 <code>~/.bash_profile</code> 文件，没有该文件就新增，然后加入以下内容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># git命令自动补全</span><br><span class="line">source ~/.git-completion.bash</span><br><span class="line"># git显示分支官方实现</span><br><span class="line">GIT_PS1_SHOWDIRTYSTATE=true</span><br><span class="line">GIT_PS1_SHOWCOLORHINTS=true</span><br><span class="line">GIT_PS1_SHOWSTASHSTATE=true</span><br><span class="line">GIT_PS1_SHOWUNTRACKEDFILES=true</span><br><span class="line">#GIT_PS1_SHOWUPSTREAM=auto           </span><br><span class="line">if [ -f ~/.git-completion.bash ]; then</span><br><span class="line">  source ~/.git-prompt.sh</span><br><span class="line">  PROMPT_COMMAND=&#x27;__git_ps1 &quot;[\t][\u@\h:\w]&quot; &quot;\\\$ &quot;&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure><h3 id="4、执行以下命令进行刷新"><a href="#4、执行以下命令进行刷新" class="headerlink" title="4、执行以下命令进行刷新"></a>4、执行以下命令进行刷新</h3><p><code>source ~/.bash_profile</code></p><h3 id="5、bingo，enjoy！"><a href="#5、bingo，enjoy！" class="headerlink" title="5、bingo，enjoy！"></a>5、bingo，enjoy！</h3><h4 id="【PS：有一个大坑需要注意】"><a href="#【PS：有一个大坑需要注意】" class="headerlink" title="【PS：有一个大坑需要注意】"></a>【PS：有一个大坑需要注意】</h4><p>官方的 <code>git-completion.bash</code> 文件在 <code>2289880f784326dc955f213072164539dcaf445e</code> 提交节点下有问题，无法使用。折腾了好久，最后使用<a href="https://www.jianshu.com/writer#/notebooks/16792301/notes/29257216">旧版的文件</a>可以使用。</p><h4 id="【2019-5-10更新：大坑已修复】"><a href="#【2019-5-10更新：大坑已修复】" class="headerlink" title="【2019.5.10更新：大坑已修复】"></a>【2019.5.10更新：大坑已修复】</h4><p>迄今为止最新的commit（<code>01f8d78887d45dc10f29d3926d5cc52f78838846</code>）已经可以在（<code>MacOS Mojave 10.14.4</code>） 下正常使用</p><h4 id="【2020-4-22更新】"><a href="#【2020-4-22更新】" class="headerlink" title="【2020.4.22更新】"></a>【2020.4.22更新】</h4><p>Mac OS Catalina 10.15.2 中，终端默认使用的shell脚本是zsh，不是bash。这会导致上面第4步执行失败，报错如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARNING: this script is deprecated, please see git-completion.zsh</span><br></pre></td></tr></table></figure><p>但是Git并没有兼容zsh，所以还是得用回bash。解决办法如下：<br>终端 –&gt; 偏好设置 –&gt; 通用 –&gt; Shell的打开方式，选中【命令（完整的路径）】，设置为：/bin/bash</p><p><img src="images/macOS/git_autoCommand/01.png"></p><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>1、<a href="https://blog.csdn.net/weixin_36372074/article/details/73612496">GIT 自动补全命令,分支名 以及 高亮显示当前分支</a><br>2、<a href="https://gist.github.com/xhlwill/688c92d8a6026085fffe4ab6c97855ae">修改 .bash_profile(mac) 或 .bashrc(linux) 让 terminal 能自动补全 git 命令、显示 git 分支等信息 (git-completion.bash 和 git-prompt.sh 放入 ~ 目录)</a><br>3、<a href="https://blog.csdn.net/zhangt85/article/details/43611997">Mac下git命令自动补全</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;【注】&lt;code&gt;~/.bashrc&lt;/code&gt; 是Linux的，对应到Mac OSX 是 &lt;code&gt;~/.bash_profile&lt;/code&gt; ，看网上的教程要注意区分和替换&lt;/p&gt;
+&lt;h3 id=&quot;1、执行以下命令，克隆官方git库，然后找到两个关键文件&quot;&gt;&lt;a </summary>
+      
+    
+    
+    
+    <category term="macOS" scheme="http://example.com/categories/macOS/"/>
+    
+    <category term="git" scheme="http://example.com/categories/macOS/git/"/>
+    
+    
+    <category term="macOS" scheme="http://example.com/tags/macOS/"/>
+    
+    <category term="git" scheme="http://example.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>

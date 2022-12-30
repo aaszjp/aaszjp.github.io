@@ -22,16 +22,18 @@
 
   <meta name="description" content="主业iOS开发，副业没想好">
 <meta property="og:type" content="website">
-<meta property="og:title" content="andyzhen的小黑屋">
-<meta property="og:url" content="http://example.com/archives/2022/12/index.html">
+<meta property="og:title" content="分类">
+<meta property="og:url" content="http://example.com/categories/index.html">
 <meta property="og:site_name" content="andyzhen的小黑屋">
 <meta property="og:description" content="主业iOS开发，副业没想好">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-29T18:03:06.000Z">
+<meta property="article:modified_time" content="2022-12-29T18:04:15.037Z">
 <meta property="article:author" content="andyzhen">
 <meta property="article:tag" content="iOS, OC, cocoapods, git, 性能优化">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2022/12/">
+<link rel="canonical" href="http://example.com/categories/">
 
 
 <script id="page-configurations">
@@ -44,7 +46,8 @@
   };
 </script>
 
-  <title>归档 | andyzhen的小黑屋</title>
+  <title>分类 | andyzhen的小黑屋
+</title>
   
 
 
@@ -183,77 +186,56 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+  
+  
 
-          <div class="content archive">
+          <div class="content page posts-expand">
             
 
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">分类
+</h1>
+
+<div class="post-meta">
   
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 2 篇日志。 继续努力。</span>
-      </div>
+
+</div>
+
+</header>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+      
+      
+      <div class="post-body">
+          <div class="category-all-page">
+            <div class="category-all-title">
+              目前共计 2 个分类
+            </div>
+            <div class="category-all">
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/macOS/">macOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/macOS/git/">git</a><span class="category-list-count">1</span></li></ul></li></ul>
+            </div>
+          </div>
+        
+      </div>
+      
+      
+      
     </div>
+    
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-12-30T02:27:36+08:00"
-              content="2022-12-30">
-          12-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/12/30/macOS/git_autoCommand/" itemprop="url">
-            <span itemprop="name">GIT 自动补全命令,分支名 以及 高亮显示当前分支</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-12-28T23:39:59+08:00"
-              content="2022-12-28">
-          12-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/12/28/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
-    </div>
-  </div>
-  
-  
-  
-
-  
-
+    
+    
+    
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -481,6 +463,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2cc2860ecd27aa0619d6',
+      clientSecret: '7c69b7912413e08ff14bb2729388a45d36f88734',
+      repo        : 'aaszjp.github.io',
+      owner       : 'aaszjp',
+      admin       : ['aaszjp'],
+      id          : 'a676607444a8bc8b150c9a3aff884e61',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 </body>
