@@ -22,7 +22,7 @@ tags:
   类似于一个巨大的明文分组 -> 密文分组的对照表。
 
 
-![](images/iOS/encode_theory/01.jpg)
+![](/images/iOS/encode_theory/01.jpg)
 
   **某一块分组被修改，不影响后面的加密结果**
 
@@ -30,7 +30,7 @@ tags:
   在CBC模式中，首先将明文分组与前一个密文分组进行XOR(异或)运算，然后再进行加密。
   每一个分组的加密结果依赖需要与前一个进行异或运算，由于第一个分组没有前一个分组，所以需要提供一个初始向量iv
 
-![](images/iOS/encode_theory/02.jpg)
+![](/images/iOS/encode_theory/02.jpg)
 
 **某一块分组被修改，影响后面的加密结果**
 
@@ -61,7 +61,7 @@ tags:
 迪菲－赫尔曼密钥交换（Diffie–Hellman key exchange，简称“D–H”） 是一种安全协议。
 它可以让双方在完全没有对方任何预先信息的条件下通过不安全信道建立起一个密钥。这个密钥可以在后续的通讯中作为对称密钥来加密通讯内容。
 - 算法原理及证明过程如下：
-![](images/iOS/encode_theory/03.jpg)
+![](/images/iOS/encode_theory/03.jpg)
 【注】DH算法也并不能避免中间人攻击，要想避免，还是得需要验证双方身份，即证书
 
 

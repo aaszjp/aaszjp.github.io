@@ -42,7 +42,7 @@ sudo gem update --system
 sudo gem install cocoapods
 ```
 如果出现以下报错：
-![来自本人电脑](images/iOS/cocoapods_install_use/01.png)
+![来自本人电脑](/images/iOS/cocoapods_install_use/01.png)
 修改安装命令为：
 ```
 sudo gem install -n /usr/local/bin cocoapods
@@ -147,7 +147,7 @@ git config --global http.proxy socks5://127.0.0.1:1086
 git config --global http.https://github.com.proxy socks5://127.0.0.1:1086
 ```
 注意，上面的端口号是自己的代理的端口
-![shadow socks高级设置](images/iOS/cocoapods_install_use/02.png)
+![shadow socks高级设置](/images/iOS/cocoapods_install_use/02.png)
 4、执行pod update，binggo
 【参考】[pod repo update速度慢](https://www.jianshu.com/p/bf26e92ec5b1)
 
