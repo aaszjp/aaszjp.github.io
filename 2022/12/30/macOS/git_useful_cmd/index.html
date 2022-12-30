@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_az/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_az/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_az/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/icon_az/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="常规基本操作 Git克隆某一个特定的远程分支1$ git clone -b &lt;分支名&gt; &lt;仓库地址&gt;  修改最后一次提交有时候我们提交完了才发现漏掉了几个文件没有加，或者提交信息写错了。想要撤消刚才的提交操作，可以使用 –amend选项重新提交： 1$ git commit --amend  抓取12&#x2F;&#x2F; 刷新远程仓库的信息$ git fetch origin 拉取1$ g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git实用命令">
+<meta property="og:url" content="http://example.com/2022/12/30/macOS/git_useful_cmd/index.html">
+<meta property="og:site_name" content="andyzhen的小黑屋">
+<meta property="og:description" content="常规基本操作 Git克隆某一个特定的远程分支1$ git clone -b &lt;分支名&gt; &lt;仓库地址&gt;  修改最后一次提交有时候我们提交完了才发现漏掉了几个文件没有加，或者提交信息写错了。想要撤消刚才的提交操作，可以使用 –amend选项重新提交： 1$ git commit --amend  抓取12&#x2F;&#x2F; 刷新远程仓库的信息$ git fetch origin 拉取1$ g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-30T10:45:08.000Z">
+<meta property="article:modified_time" content="2022-12-30T10:50:19.536Z">
+<meta property="article:author" content="andyzhen">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/12/30/macOS/git_useful_cmd/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git实用命令 | andyzhen的小黑屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="andyzhen的小黑屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">andyzhen的小黑屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">因为热爱</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/aaszjp" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/macOS/git_useful_cmd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git实用命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:45:08 / 修改时间：18:50:19" itemprop="dateCreated datePublished" datetime="2022-12-30T18:45:08+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="常规基本操作"><a href="#常规基本操作" class="headerlink" title="常规基本操作"></a>常规基本操作</h1><ul>
+<li><h3 id="Git克隆某一个特定的远程分支"><a href="#Git克隆某一个特定的远程分支" class="headerlink" title="Git克隆某一个特定的远程分支"></a>Git克隆某一个特定的远程分支</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone -b &lt;分支名&gt; &lt;仓库地址&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="修改最后一次提交"><a href="#修改最后一次提交" class="headerlink" title="修改最后一次提交"></a>修改最后一次提交</h3><p>有时候我们提交完了才发现漏掉了几个文件没有加，或者提交信息写错了。想要撤消刚才的提交操作，可以使用 –amend选项重新提交：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="抓取"><a href="#抓取" class="headerlink" title="抓取"></a>抓取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 刷新远程仓库的信息</span><br><span class="line">$ git fetch origin</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull --rebase origin &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;分支名&gt;</span><br><span class="line">$ git push origin serverfix:serferfix  //上传我本地的 serverfix 分支到远程仓库中去，仍旧称它为 serverfix 分支</span><br><span class="line">$ git push origin serverfix:awesomebranch  //把本地分支推送到某个命名不同的远程分支</span><br></pre></td></tr></table></figure></li>
+<li><p>-force 加上该参数，会用本地的版本信息强行覆盖远端的版本信息，配合git reset –hard HEAD^ 使用可撤销远端的commit</p>
+</li>
+<li><h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push [远程名] :[分支名]</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git mv fileA fileB</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h1><ul>
+<li><h3 id="查询某人的提交记录"><a href="#查询某人的提交记录" class="headerlink" title="查询某人的提交记录"></a>查询某人的提交记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log  --author=””</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查询某文件的提交记录"><a href="#查询某文件的提交记录" class="headerlink" title="查询某文件的提交记录"></a>查询某文件的提交记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log &lt;file&gt;</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查看所有分支的提交记录"><a href="#查看所有分支的提交记录" class="headerlink" title="查看所有分支的提交记录"></a>查看所有分支的提交记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --all</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="以类似sourcetree的图形形式查看log历史"><a href="#以类似sourcetree的图形形式查看log历史" class="headerlink" title="以类似sourcetree的图形形式查看log历史"></a>以类似sourcetree的图形形式查看log历史</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="查看远程仓库的日志"><a href="#查看远程仓库的日志" class="headerlink" title="查看远程仓库的日志"></a>查看远程仓库的日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ git log origin/master --oneline -n 3</span><br><span class="line"></span><br><span class="line">	-(n)				仅显示最近的 n 条提交</span><br><span class="line">	--since, --after 	仅显示指定时间之后的提交。</span><br><span class="line">	--until, --before 	仅显示指定时间之前的提交。</span><br><span class="line">	--author 			仅显示指定作者相关的提交。</span><br><span class="line">	--committer 		仅显示指定提交者相关的提交。</span><br><span class="line">	-p 					按补丁格式显示每个更新之间的差异。</span><br><span class="line">	--stat 				显示每次更新的文件修改统计信息。</span><br><span class="line">	--shortstat 		只显示 --stat 中最后的行数修改添加移除统计。</span><br><span class="line">	--name-only 		仅在提交信息后显示已修改的文件清单。</span><br><span class="line">	--name-status 		显示新增、修改、删除的文件清单。</span><br><span class="line">	--abbrev-commit 	仅显示 SHA-1 的前几个字符，而非所有的 40 个字符。</span><br><span class="line">	--relative-date 	使用较短的相对时间显示（比如，“2 weeks ago”）。</span><br><span class="line">	--graph 			显示 ASCII 图形表示的分支合并历史。</span><br><span class="line">	--pretty 			使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1328069733264.html">选项说明参考此文</a></p>
+</li>
+<li><h3 id="统计代码行数"><a href="#统计代码行数" class="headerlink" title="统计代码行数"></a>统计代码行数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --author=&quot;andy.zhen&quot; --since ==2019-6-24 --until=2019-6-29 --pretty=tformat: --numstat | awk &#x27;&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf &quot;added lines: %s, removed lines: %s, total lines: %s\n&quot;, add, subs, loc &#125;&#x27; -</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查看操作记录"><a href="#查看操作记录" class="headerlink" title="查看操作记录"></a>查看操作记录</h3><p>可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录，git log则不能察看已经删除了的commit记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout &lt;name&gt;</span><br><span class="line">	切换分支</span><br><span class="line">$ git checkout -b &lt;name&gt;</span><br><span class="line">	创建+切换分支</span><br><span class="line">$ git checkout -b [分支名] [远程名]/[分支名]</span><br><span class="line">$ git checkout -b sf origin/serverfix</span><br><span class="line">	现在你的本地分支 sf 会自动向 origin/serverfix 推送和抓取数据了</span><br><span class="line"></span><br><span class="line">$ git branch</span><br><span class="line">	查看分支</span><br><span class="line">$ git branch &lt;name&gt;</span><br><span class="line">	创建分支</span><br><span class="line">$ git branch -v</span><br><span class="line">	查看各个分支最后一个提交对象的信息</span><br><span class="line">$ git branch --merged</span><br><span class="line">	查看哪些分支已被并入当前分支</span><br><span class="line">$ git branch --no-merged</span><br><span class="line">	查看还未合并进来的分支</span><br><span class="line">$ git branch -d &lt;name&gt;</span><br><span class="line">	删除本地分支</span><br><span class="line">$ git branch -D &lt;name&gt;</span><br><span class="line">	强制删除本地分支</span><br><span class="line">$ git branch --set-upstream-to=origin/[远程分支名]  [本地分支名]</span><br><span class="line">	设置本地分支与远程分支的映射关系</span><br><span class="line"></span><br><span class="line">$ git merge &lt;name&gt;</span><br><span class="line">	合并某分支到当前分支</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="暂存"><a href="#暂存" class="headerlink" title="暂存"></a>暂存</h1><ul>
+<li><h3 id="暂存区"><a href="#暂存区" class="headerlink" title="暂存区"></a>暂存区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git add &lt;file&gt;</span><br><span class="line">	将修改添加到暂存区</span><br><span class="line">$ git add .</span><br><span class="line">	将所有修改添加到暂存区</span><br><span class="line"></span><br><span class="line">$ git checkout -- &lt;file&gt;</span><br><span class="line">	丢弃未暂存的某个文件的修改</span><br><span class="line">$ git checkout .</span><br><span class="line">	丢弃未暂存的所有文件的修改</span><br><span class="line"></span><br><span class="line">$ git reset HEAD &lt;file&gt;</span><br><span class="line">	取消已经暂存的文件</span><br><span class="line">$ git reset --hard HEAD^</span><br><span class="line">	撤销本地的上一次提交，</span><br><span class="line">	--hard 源码也会回退到某个版本，commit和index 都回回退到某个版本。（注意，这种方式是改变本地代码仓库源码）</span><br><span class="line">	--soft 保留源码，只回退到commit 信息到某个版本，不涉及index的回退，如果还需要提交，直接commit即可</span><br><span class="line">	HRAD^ 表示上一个提交，HEAD^^ 表示上上个提交，也可表示为 HEAD~2，以此类推</span><br><span class="line">	git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit。reset 是在正常的commit历史中，删除了指定的commit，这时 HEAD 是向后移动了，而 revert 是在正常的commit历史中再commit一次，只不过是反向提交，他的 HEAD 是一直向前的</span><br></pre></td></tr></table></figure>
+<p>【参考】<a target="_blank" rel="noopener" href="http://yijiebuyi.com/blog/8f985d539566d0bf3b804df6be4e0c90.html">git reset revert 回退回滚取消提交返回上一版本</a></p>
+</li>
+<li><h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">	查看未暂存的更新</span><br><span class="line">$ git diff --cached</span><br><span class="line">	查看已暂存的更新</span><br><span class="line">$ git diff HEAD -- &lt;name&gt;</span><br><span class="line">	查看工作区和版本库里面最新版本的区别</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="保存未提交的修改"><a href="#保存未提交的修改" class="headerlink" title="保存未提交的修改"></a>保存未提交的修改</h3><p>git stash 可用来暂存当前正在进行的工作， 比如想 pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$git stash</span><br><span class="line">$git stash pop</span><br><span class="line">$git stash list</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="跟踪或取消跟踪文件"><a href="#跟踪或取消跟踪文件" class="headerlink" title="跟踪或取消跟踪文件"></a>跟踪或取消跟踪文件</h3></li>
+</ul>
+<p>1、当被跟踪的文件里面有不想跟踪的文件时，使用命令git rm删除文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached readme1.txt    删除readme1.txt的跟踪，并保留在本地。</span><br><span class="line">git rm --f readme1.txt    删除readme1.txt的跟踪，并且删除本地文件。</span><br><span class="line">然后git commit即可。</span><br></pre></td></tr></table></figure>
+<p>2、每次用git status查看状态时总是列出未被跟踪的文件，可以通过.gitignore文件达到目的。语法如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/mtk/ 过滤整个文件夹</span><br><span class="line"></span><br><span class="line">*.zip 过滤所有.zip文件</span><br><span class="line"></span><br><span class="line">/mtk/do.c 过滤某个具体文件</span><br></pre></td></tr></table></figure>
+<p>3、删除未被跟踪的文件或文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 查看将要被删除的未跟踪文件</span><br><span class="line">$ git clean -n</span><br><span class="line">// 删除未跟踪文件</span><br><span class="line">$ git clean -f</span><br><span class="line">// 如果要操作的对象是文件夹，则在后面加上 -d 参数</span><br><span class="line">$ git clean -n -d</span><br><span class="line">$ git clean -f -d</span><br></pre></td></tr></table></figure>
+<p>最后需要强调的一点是，如果你不慎在创建.gitignore文件之前就commit了项目，那么即使你在.gitignore文件中写入新的过滤规则，这些规则也不会起作用，Git仍然会对所有文件进行版本管理。<br><em><strong>此时要想新的规则生效，需要执行第1种情况里的步骤</strong></em></p>
+<p>【参考】<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5cf72a7e2bbf">Git——跟踪或取消跟踪文件</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/76c93dd3eaad">移除git下的untracked files</a></p>
+<h1 id="为所欲为的rebase"><a href="#为所欲为的rebase" class="headerlink" title="为所欲为的rebase"></a>为所欲为的rebase</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i  [startpoint]  [endpoint]</span><br></pre></td></tr></table></figure>
+<p>可以对某一段线性提交历史进行编辑、删除、合并、拆分、重排序等<br><strong>可不指定endpoint，但是startpoint是开集，不包含startpoint的commitid</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase   [startpoint]   [endpoint]  --onto  [branchName]</span><br></pre></td></tr></table></figure>
+<p>指定当前分支的一个编辑区间(前开后闭)，复制粘贴到指定分支<br>这里重点记录一下参考文章中没提到的拆分、重排序操作</p>
+<ul>
+<li>一个commit拆分成多个<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、使用 git rebase -i commitid 后，在需要拆分的 commitid 处，将 pick 修改为 edit 或 e</span><br><span class="line">2、使用 git reset --soft HEAD^ 将当前 commit 重置到暂存区</span><br><span class="line">3、将代码分别 commit</span><br><span class="line">4、执行 git rebase --continue，大功告成</span><br></pre></td></tr></table></figure></li>
+<li>commit 重排序<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、执行 git rebase -i commitid </span><br><span class="line">2、在编辑区，将几个commit的位置变换。剪切无法使用，只能手工选中、复制、粘贴、删除</span><br><span class="line">3、保存退出，大功告成</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>【参考】<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4a8f4af4e803">【Git】rebase 用法小结</a></p>
+<h1 id="git对象"><a href="#git对象" class="headerlink" title="git对象"></a>git对象</h1><p>tree 对应目录快照，blob 对应文件快照（与文件名无关）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 查看对象类型</span><br><span class="line">$ git cat-file -t objid</span><br><span class="line">// 查到对象内容</span><br><span class="line">$ git cat-file -p objid</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<h2 id="Danger-Zone"><a href="#Danger-Zone" class="headerlink" title="Danger Zone"></a>Danger Zone</h2><p>【参考】<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/811b07b129e8">git同步远程仓库分支</a></p>
+</blockquote>
+<h4 id="1、本地删除了分支，远程也想删除。"><a href="#1、本地删除了分支，远程也想删除。" class="headerlink" title="1、本地删除了分支，远程也想删除。"></a>1、本地删除了分支，远程也想删除。</h4><ul>
+<li>相关命令：</li>
+</ul>
+<p>1.删除远程分支: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin -d 分支名</span><br></pre></td></tr></table></figure>
+<p>2.删除本地分支: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体情况：</li>
+</ul>
+<p><strong>a.假如我在本地想要删除某个分支，我也想把远程仓库的这个分支也要删掉怎么办？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.使用git branch -d 分支名来删除本地分支。</span><br><span class="line">2.使用git push origin -d 分支名直接来删除远程分支。再次使用git branch -a,发现分支已经不存在了。</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">1.使用git branch -d 分支名来删除本地分支。</span><br><span class="line">2.最简单的解决办法就是直接到gitlab/github进行删除。</span><br></pre></td></tr></table></figure>
+
+<p><strong>b.假如我只想把远程的删除掉怎么办？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.使用git push origin -d 分支名直接来删除远程分支。此时删除的只是远程的分支，本地仍然存在</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">1.直接到gitlab/github进行删除</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、远程删除了分支，本地也想删除"><a href="#2、远程删除了分支，本地也想删除" class="headerlink" title="2、远程删除了分支，本地也想删除"></a>2、远程删除了分支，本地也想删除</h4><ul>
+<li>相关命令：</li>
+</ul>
+<p>1.查看远程分支和本地分支的对应关系: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote show origin  </span><br></pre></td></tr></table></figure>
+<p>2.删除远程已经删除过的分支: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote prune origin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>具体情况：</li>
+</ul>
+<p>假如我直接到 gitlab/github 删除了某个分支，我在本地使用 git branch -a 查看远程分支，依然存在并且可以切换使用。我本地也想把远程分支记录删除怎么办？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.git branch -a 查看远程分支，红色的是本地远程远程分支记录。</span><br><span class="line">2.执行下面命令查看远程仓库分支和本地仓库的远程分支记录的对应关系：</span><br><span class="line">    git remote show origin  </span><br><span class="line">3.会看到：refs/remotes/origin/远程仓库已经删除的分支名              stale (use &#x27;git remote prune&#x27; to remove)</span><br><span class="line">    其中：Local refs configured for &#x27;git push&#x27;:  命令下面的分支是本地仓库的远程分支记录中仍存在的分支，但远程仓库已经不存在。</span><br><span class="line">4.输入git remote prune origin 来删除远程仓库已经删除过的分支</span><br><span class="line">5.验证 git branch -a</span><br><span class="line"></span><br><span class="line">此时可以看到本地远程分支记录已经和远程仓库保持一致了。</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/macOS/" rel="tag"># macOS</a>
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/12/30/iOS/presentVC/" rel="prev" title="presentVC小结">
+      <i class="fa fa-chevron-left"></i> presentVC小结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/30/iOS/iOS_font_bold/" rel="next" title="iOS中的加粗字体">
+      iOS中的加粗字体 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">常规基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%85%8B%E9%9A%86%E6%9F%90%E4%B8%80%E4%B8%AA%E7%89%B9%E5%AE%9A%E7%9A%84%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="nav-number">1.0.1.</span> <span class="nav-text">Git克隆某一个特定的远程分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="nav-number">1.0.2.</span> <span class="nav-text">修改最后一次提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%93%E5%8F%96"><span class="nav-number">1.0.3.</span> <span class="nav-text">抓取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E5%8F%96"><span class="nav-number">1.0.4.</span> <span class="nav-text">拉取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E9%80%81"><span class="nav-number">1.0.5.</span> <span class="nav-text">推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="nav-number">1.0.6.</span> <span class="nav-text">删除远程分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">1.0.7.</span> <span class="nav-text">文件重命名</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-log"><span class="nav-number">2.</span> <span class="nav-text">git log</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%90%E4%BA%BA%E7%9A%84%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">2.0.1.</span> <span class="nav-text">查询某人的提交记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%90%E6%96%87%E4%BB%B6%E7%9A%84%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">2.0.2.</span> <span class="nav-text">查询某文件的提交记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E5%88%86%E6%94%AF%E7%9A%84%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">2.0.3.</span> <span class="nav-text">查看所有分支的提交记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E7%B1%BB%E4%BC%BCsourcetree%E7%9A%84%E5%9B%BE%E5%BD%A2%E5%BD%A2%E5%BC%8F%E6%9F%A5%E7%9C%8Blog%E5%8E%86%E5%8F%B2"><span class="nav-number">2.0.4.</span> <span class="nav-text">以类似sourcetree的图形形式查看log历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%97%A5%E5%BF%97"><span class="nav-number">2.0.5.</span> <span class="nav-text">查看远程仓库的日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0"><span class="nav-number">2.0.6.</span> <span class="nav-text">统计代码行数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95"><span class="nav-number">2.0.7.</span> <span class="nav-text">查看操作记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">3.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9A%82%E5%AD%98"><span class="nav-number">4.</span> <span class="nav-text">暂存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">4.0.1.</span> <span class="nav-text">暂存区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff"><span class="nav-number">4.0.2.</span> <span class="nav-text">diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">4.0.3.</span> <span class="nav-text">查看配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E6%9C%AA%E6%8F%90%E4%BA%A4%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">4.0.4.</span> <span class="nav-text">保存未提交的修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E8%B8%AA%E6%88%96%E5%8F%96%E6%B6%88%E8%B7%9F%E8%B8%AA%E6%96%87%E4%BB%B6"><span class="nav-number">4.0.5.</span> <span class="nav-text">跟踪或取消跟踪文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E6%89%80%E6%AC%B2%E4%B8%BA%E7%9A%84rebase"><span class="nav-number">5.</span> <span class="nav-text">为所欲为的rebase</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">git对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Danger-Zone"><span class="nav-number">6.1.</span> <span class="nav-text">Danger Zone</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E6%9C%AC%E5%9C%B0%E5%88%A0%E9%99%A4%E4%BA%86%E5%88%86%E6%94%AF%EF%BC%8C%E8%BF%9C%E7%A8%8B%E4%B9%9F%E6%83%B3%E5%88%A0%E9%99%A4%E3%80%82"><span class="nav-number">6.1.0.1.</span> <span class="nav-text">1、本地删除了分支，远程也想删除。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E8%BF%9C%E7%A8%8B%E5%88%A0%E9%99%A4%E4%BA%86%E5%88%86%E6%94%AF%EF%BC%8C%E6%9C%AC%E5%9C%B0%E4%B9%9F%E6%83%B3%E5%88%A0%E9%99%A4"><span class="nav-number">6.1.0.2.</span> <span class="nav-text">2、远程删除了分支，本地也想删除</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="andyzhen"
+      src="/images/icon_az/logo.png">
+  <p class="site-author-name" itemprop="name">andyzhen</p>
+  <div class="site-description" itemprop="description">主业iOS开发，副业没想好</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">andyzhen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2cc2860ecd27aa0619d6',
+      clientSecret: '7c69b7912413e08ff14bb2729388a45d36f88734',
+      repo        : 'aaszjp.github.io',
+      owner       : 'aaszjp',
+      admin       : ['aaszjp'],
+      id          : 'bed8e53b20bc8d11a9dc2efc9fdf788e',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

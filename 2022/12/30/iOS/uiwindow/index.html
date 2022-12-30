@@ -20,23 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="【注】~&#x2F;.bashrc 是Linux的，对应到Mac OSX 是 ~&#x2F;.bash_profile ，看网上的教程要注意区分和替换 1、执行以下命令，克隆官方git库，然后找到两个关键文件git clone git@github.com:git&#x2F;git.git  contrib&#x2F;completion&#x2F;git-completion.bash 自动补全 contrib&#x2F;completion&#x2F;git-p">
+  <meta name="description" content="iOS系统差异app有多个 window 对象时，并且keywindow 不是根window时，一些第三方自定义键盘（不是搜狗那种第三方系统键盘类型）iOS9、10：可以显示iOS11、12：不可显示 根windowapp启动时创建的第一个window，亦可称为mainwindow获取方法： 12[UIApplication sharedApplication].delegate.window[U">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GIT 自动补全命令,分支名 以及 高亮显示当前分支">
-<meta property="og:url" content="http://example.com/2022/12/30/macOS/git_autoCommand/index.html">
+<meta property="og:title" content="关于UIWindow">
+<meta property="og:url" content="http://example.com/2022/12/30/iOS/uiwindow/index.html">
 <meta property="og:site_name" content="andyzhen的小黑屋">
-<meta property="og:description" content="【注】~&#x2F;.bashrc 是Linux的，对应到Mac OSX 是 ~&#x2F;.bash_profile ，看网上的教程要注意区分和替换 1、执行以下命令，克隆官方git库，然后找到两个关键文件git clone git@github.com:git&#x2F;git.git  contrib&#x2F;completion&#x2F;git-completion.bash 自动补全 contrib&#x2F;completion&#x2F;git-p">
+<meta property="og:description" content="iOS系统差异app有多个 window 对象时，并且keywindow 不是根window时，一些第三方自定义键盘（不是搜狗那种第三方系统键盘类型）iOS9、10：可以显示iOS11、12：不可显示 根windowapp启动时创建的第一个window，亦可称为mainwindow获取方法： 12[UIApplication sharedApplication].delegate.window[U">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/12/30/macOS/git_autoCommand/images/macOS/git_autoCommand/01.png">
-<meta property="article:published_time" content="2022-12-29T18:27:36.000Z">
-<meta property="article:modified_time" content="2022-12-30T07:50:24.648Z">
+<meta property="article:published_time" content="2022-12-30T09:33:30.000Z">
+<meta property="article:modified_time" content="2022-12-30T09:35:14.074Z">
 <meta property="article:author" content="andyzhen">
-<meta property="article:tag" content="macOS">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="UIKit">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/12/30/macOS/git_autoCommand/images/macOS/git_autoCommand/01.png">
 
-<link rel="canonical" href="http://example.com/2022/12/30/macOS/git_autoCommand/">
+<link rel="canonical" href="http://example.com/2022/12/30/iOS/uiwindow/">
 
 
 <script id="page-configurations">
@@ -49,7 +47,7 @@
   };
 </script>
 
-  <title>GIT 自动补全命令,分支名 以及 高亮显示当前分支 | andyzhen的小黑屋</title>
+  <title>关于UIWindow | andyzhen的小黑屋</title>
   
 
 
@@ -196,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/macOS/git_autoCommand/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/uiwindow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/icon_az/logo.png">
@@ -209,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          GIT 自动补全命令,分支名 以及 高亮显示当前分支
+          关于UIWindow
         </h1>
 
         <div class="post-meta">
@@ -220,7 +218,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-12-30 02:27:36 / 修改时间：15:50:24" itemprop="dateCreated datePublished" datetime="2022-12-30T02:27:36+08:00">2022-12-30</time>
+              <time title="创建时间：2022-12-30 17:33:30 / 修改时间：17:35:14" itemprop="dateCreated datePublished" datetime="2022-12-30T17:33:30+08:00">2022-12-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,11 +226,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
                 </span>
             </span>
 
@@ -247,23 +241,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>【注】<code>~/.bashrc</code> 是Linux的，对应到Mac OSX 是 <code>~/.bash_profile</code> ，看网上的教程要注意区分和替换</p>
-<h3 id="1、执行以下命令，克隆官方git库，然后找到两个关键文件"><a href="#1、执行以下命令，克隆官方git库，然后找到两个关键文件" class="headerlink" title="1、执行以下命令，克隆官方git库，然后找到两个关键文件"></a>1、执行以下命令，克隆官方git库，然后找到两个关键文件</h3><p><code>git clone git@github.com:git/git.git</code></p>
-<ul>
-<li><code>contrib/completion/git-completion.bash</code> 自动补全</li>
-<li><code>contrib/completion/git-prompt.sh</code> 高亮显示当前分支名称</li>
-</ul>
-<h3 id="2、执行以下命令，将两个文件复制到用户目录，并设置隐藏"><a href="#2、执行以下命令，将两个文件复制到用户目录，并设置隐藏" class="headerlink" title="2、执行以下命令，将两个文件复制到用户目录，并设置隐藏"></a>2、执行以下命令，将两个文件复制到用户目录，并设置隐藏</h3><p><code>cp git-completion.bash ~/.git-completion.bash</code><br><code>cp git-prompt.sh ~/.git-prompt.sh</code></p>
-<h3 id="3、配置-bash-profile-文件，没有该文件就新增，然后加入以下内容"><a href="#3、配置-bash-profile-文件，没有该文件就新增，然后加入以下内容" class="headerlink" title="3、配置 ~/.bash_profile 文件，没有该文件就新增，然后加入以下内容"></a>3、配置 <code>~/.bash_profile</code> 文件，没有该文件就新增，然后加入以下内容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># git命令自动补全</span><br><span class="line">source ~/.git-completion.bash</span><br><span class="line"># git显示分支官方实现</span><br><span class="line">GIT_PS1_SHOWDIRTYSTATE=true</span><br><span class="line">GIT_PS1_SHOWCOLORHINTS=true</span><br><span class="line">GIT_PS1_SHOWSTASHSTATE=true</span><br><span class="line">GIT_PS1_SHOWUNTRACKEDFILES=true</span><br><span class="line">#GIT_PS1_SHOWUPSTREAM=auto           </span><br><span class="line">if [ -f ~/.git-completion.bash ]; then</span><br><span class="line">  source ~/.git-prompt.sh</span><br><span class="line">  PROMPT_COMMAND=&#x27;__git_ps1 &quot;[\t][\u@\h:\w]&quot; &quot;\\\$ &quot;&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+        <h3 id="iOS系统差异"><a href="#iOS系统差异" class="headerlink" title="iOS系统差异"></a>iOS系统差异</h3><p>app有多个 <code>window</code> 对象时，并且<code>keywindow</code> 不是根<code>window</code>时，一些第三方自定义键盘（不是搜狗那种第三方系统键盘类型）<br>iOS9、10：可以显示<br>iOS11、12：不可显示</p>
+<h3 id="根window"><a href="#根window" class="headerlink" title="根window"></a>根window</h3><p>app启动时创建的第一个window，亦可称为mainwindow<br>获取方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[UIApplication sharedApplication].delegate.window</span><br><span class="line">[UIApplication sharedApplication].windows.firstObject</span><br></pre></td></tr></table></figure>
+<p>以下两种获取方法不一定准确：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[UIApplication sharedApplication].keyWindow</span><br><span class="line">self.view.window  </span><br></pre></td></tr></table></figure>
 
-<h3 id="4、执行以下命令进行刷新"><a href="#4、执行以下命令进行刷新" class="headerlink" title="4、执行以下命令进行刷新"></a>4、执行以下命令进行刷新</h3><p><code>source ~/.bash_profile</code></p>
-<h3 id="5、bingo，enjoy！"><a href="#5、bingo，enjoy！" class="headerlink" title="5、bingo，enjoy！"></a>5、bingo，enjoy！</h3><h4 id="【PS：有一个大坑需要注意】"><a href="#【PS：有一个大坑需要注意】" class="headerlink" title="【PS：有一个大坑需要注意】"></a>【PS：有一个大坑需要注意】</h4><p>官方的 <code>git-completion.bash</code> 文件在 <code>2289880f784326dc955f213072164539dcaf445e</code> 提交节点下有问题，无法使用。折腾了好久，最后使用<a target="_blank" rel="noopener" href="https://www.jianshu.com/writer#/notebooks/16792301/notes/29257216">旧版的文件</a>可以使用。</p>
-<h4 id="【2019-5-10更新：大坑已修复】"><a href="#【2019-5-10更新：大坑已修复】" class="headerlink" title="【2019.5.10更新：大坑已修复】"></a>【2019.5.10更新：大坑已修复】</h4><p>迄今为止最新的commit（<code>01f8d78887d45dc10f29d3926d5cc52f78838846</code>）已经可以在（<code>MacOS Mojave 10.14.4</code>） 下正常使用</p>
-<h4 id="【2020-4-22更新】"><a href="#【2020-4-22更新】" class="headerlink" title="【2020.4.22更新】"></a>【2020.4.22更新】</h4><p>Mac OS Catalina 10.15.2 中，终端默认使用的shell脚本是zsh，不是bash。这会导致上面第4步执行失败，报错如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARNING: this script is deprecated, please see git-completion.zsh</span><br></pre></td></tr></table></figure>
-<p>但是Git并没有兼容zsh，所以还是得用回bash。解决办法如下：<br>终端 –&gt; 偏好设置 –&gt; 通用 –&gt; Shell的打开方式，选中【命令（完整的路径）】，设置为：/bin/bash</p>
-<p><img src="images/macOS/git_autoCommand/01.png"></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>1、<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36372074/article/details/73612496">GIT 自动补全命令,分支名 以及 高亮显示当前分支</a><br>2、<a target="_blank" rel="noopener" href="https://gist.github.com/xhlwill/688c92d8a6026085fffe4ab6c97855ae">修改 .bash_profile(mac) 或 .bashrc(linux) 让 terminal 能自动补全 git 命令、显示 git 分支等信息 (git-completion.bash 和 git-prompt.sh 放入 ~ 目录)</a><br>3、<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangt85/article/details/43611997">Mac下git命令自动补全</a></p>
+<h3 id="自定义window"><a href="#自定义window" class="headerlink" title="自定义window"></a>自定义window</h3><p>显示出来的方法：<code>[myWindow makeKeyAndVisible]</code> 或者 <code>myWindow.hidden = NO</code><br>自定义window在hidden后，keywindow会自动重置为根window</p>
+<h3 id="系统alert"><a href="#系统alert" class="headerlink" title="系统alert"></a>系统alert</h3><p>系统alert弹出时，会新建一个window，同时设为key并显示，dismiss后，keywindow会自动重置为根window</p>
 
     </div>
 
@@ -273,8 +258,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/macOS/" rel="tag"># macOS</a>
-              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/UIKit/" rel="tag"># UIKit</a>
           </div>
 
         
@@ -283,10 +268,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/12/28/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/2022/12/30/iOS/encode_theory/" rel="prev" title="常用的加解密算法原理">
+      <i class="fa fa-chevron-left"></i> 常用的加解密算法原理
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/30/iOS/thread_idle_async/" rel="next" title="不阻塞线程的另一种技巧">
+      不阻塞线程的另一种技巧 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -346,7 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%85%8B%E9%9A%86%E5%AE%98%E6%96%B9git%E5%BA%93%EF%BC%8C%E7%84%B6%E5%90%8E%E6%89%BE%E5%88%B0%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">1、执行以下命令，克隆官方git库，然后找到两个关键文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%B0%86%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%88%B0%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%B9%B6%E8%AE%BE%E7%BD%AE%E9%9A%90%E8%97%8F"><span class="nav-number">2.</span> <span class="nav-text">2、执行以下命令，将两个文件复制到用户目录，并设置隐藏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AE-bash-profile-%E6%96%87%E4%BB%B6%EF%BC%8C%E6%B2%A1%E6%9C%89%E8%AF%A5%E6%96%87%E4%BB%B6%E5%B0%B1%E6%96%B0%E5%A2%9E%EF%BC%8C%E7%84%B6%E5%90%8E%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="nav-number">3.</span> <span class="nav-text">3、配置 ~&#x2F;.bash_profile 文件，没有该文件就新增，然后加入以下内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E5%88%B7%E6%96%B0"><span class="nav-number">4.</span> <span class="nav-text">4、执行以下命令进行刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81bingo%EF%BC%8Cenjoy%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">5、bingo，enjoy！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E3%80%90PS%EF%BC%9A%E6%9C%89%E4%B8%80%E4%B8%AA%E5%A4%A7%E5%9D%91%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E3%80%91"><span class="nav-number">5.1.</span> <span class="nav-text">【PS：有一个大坑需要注意】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E3%80%902019-5-10%E6%9B%B4%E6%96%B0%EF%BC%9A%E5%A4%A7%E5%9D%91%E5%B7%B2%E4%BF%AE%E5%A4%8D%E3%80%91"><span class="nav-number">5.2.</span> <span class="nav-text">【2019.5.10更新：大坑已修复】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E3%80%902020-4-22%E6%9B%B4%E6%96%B0%E3%80%91"><span class="nav-number">5.3.</span> <span class="nav-text">【2020.4.22更新】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS%E7%B3%BB%E7%BB%9F%E5%B7%AE%E5%BC%82"><span class="nav-number">1.</span> <span class="nav-text">iOS系统差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9window"><span class="nav-number">2.</span> <span class="nav-text">根window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89window"><span class="nav-number">3.</span> <span class="nav-text">自定义window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9Falert"><span class="nav-number">4.</span> <span class="nav-text">系统alert</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -362,20 +350,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -539,7 +527,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'aaszjp.github.io',
       owner       : 'aaszjp',
       admin       : ['aaszjp'],
-      id          : '5b7fb8689eb3cc518b5e253f7c7b6abe',
+      id          : '606bcc085254fb4127419afedc4bc440',
         language: 'zh-CN',
       distractionFreeMode: true
     });

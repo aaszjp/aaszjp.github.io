@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/macOS/git_autoCommand/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/cocoapods_install_m1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/icon_az/logo.png">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/12/30/macOS/git_autoCommand/" class="post-title-link" itemprop="url">GIT 自动补全命令,分支名 以及 高亮显示当前分支</a>
+            <a href="/2022/12/30/iOS/cocoapods_install_m1/" class="post-title-link" itemprop="url">M1 Mac 安装 CocoaPods 小结</a>
         </h2>
 
         <div class="post-meta">
@@ -215,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-12-30 02:27:36 / 修改时间：15:50:24" itemprop="dateCreated datePublished" datetime="2022-12-30T02:27:36+08:00">2022-12-30</time>
+              <time title="创建时间：2022-12-30 20:52:12 / 修改时间：20:54:00" itemprop="dateCreated datePublished" datetime="2022-12-30T20:52:12+08:00">2022-12-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,11 +223,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
                 </span>
             </span>
 
@@ -242,23 +238,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>【注】<code>~/.bashrc</code> 是Linux的，对应到Mac OSX 是 <code>~/.bash_profile</code> ，看网上的教程要注意区分和替换</p>
-<h3 id="1、执行以下命令，克隆官方git库，然后找到两个关键文件"><a href="#1、执行以下命令，克隆官方git库，然后找到两个关键文件" class="headerlink" title="1、执行以下命令，克隆官方git库，然后找到两个关键文件"></a>1、执行以下命令，克隆官方git库，然后找到两个关键文件</h3><p><code>git clone git@github.com:git/git.git</code></p>
-<ul>
-<li><code>contrib/completion/git-completion.bash</code> 自动补全</li>
-<li><code>contrib/completion/git-prompt.sh</code> 高亮显示当前分支名称</li>
-</ul>
-<h3 id="2、执行以下命令，将两个文件复制到用户目录，并设置隐藏"><a href="#2、执行以下命令，将两个文件复制到用户目录，并设置隐藏" class="headerlink" title="2、执行以下命令，将两个文件复制到用户目录，并设置隐藏"></a>2、执行以下命令，将两个文件复制到用户目录，并设置隐藏</h3><p><code>cp git-completion.bash ~/.git-completion.bash</code><br><code>cp git-prompt.sh ~/.git-prompt.sh</code></p>
-<h3 id="3、配置-bash-profile-文件，没有该文件就新增，然后加入以下内容"><a href="#3、配置-bash-profile-文件，没有该文件就新增，然后加入以下内容" class="headerlink" title="3、配置 ~/.bash_profile 文件，没有该文件就新增，然后加入以下内容"></a>3、配置 <code>~/.bash_profile</code> 文件，没有该文件就新增，然后加入以下内容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># git命令自动补全</span><br><span class="line">source ~/.git-completion.bash</span><br><span class="line"># git显示分支官方实现</span><br><span class="line">GIT_PS1_SHOWDIRTYSTATE=true</span><br><span class="line">GIT_PS1_SHOWCOLORHINTS=true</span><br><span class="line">GIT_PS1_SHOWSTASHSTATE=true</span><br><span class="line">GIT_PS1_SHOWUNTRACKEDFILES=true</span><br><span class="line">#GIT_PS1_SHOWUPSTREAM=auto           </span><br><span class="line">if [ -f ~/.git-completion.bash ]; then</span><br><span class="line">  source ~/.git-prompt.sh</span><br><span class="line">  PROMPT_COMMAND=&#x27;__git_ps1 &quot;[\t][\u@\h:\w]&quot; &quot;\\\$ &quot;&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+          <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p><code>M1 Mac</code> 下 <code>CocoaPods</code> 的安装思路与 <code>Inter Mac</code> 下的安装思路一致，基本包含以下几个步骤：<br>1、升级 <code>Ruby</code> 环境<br>2、安装 <code>CocoaPods</code><br>3、初始化 <code>CocoaPods</code><br>但是由于<br>1、 <code>M1 Mac</code> 系统权限更严格，在升级 <code>Ruby</code> 环境 <code>gem update --system</code> 时即使加了 <code>sudo</code> 也会出现报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">you don&#x27;t have write permissions for the /system/library/frameworks/ruby.framework/versions/2.6/usr/lib/ruby/gems/2.6.0 directory.</span><br></pre></td></tr></table></figure>
+<p>2、<code>CocoaPods</code> 自身初始化的方式发生了变化，执行 <code>pod setup</code> 仅提示 <code>Setup complete</code> 但没有实际效果<br>导致操作流程有所区别。因此我把整个操作流程及中途遇到的坑及解决方案记录下来，以供查阅。</p>
+<h2 id="二、原理"><a href="#二、原理" class="headerlink" title="二、原理"></a>二、原理</h2><p><code>gem</code> 是 <code>Ruby</code> 的包管理器。从上述的权限报错可以看出，既然系统自带的 <code>Ruby</code> 不给我们权限去操作 <code>gem</code> ，那就曲线救国，我们通过 <code>Homebrew</code> 安装自己的 <code>Ruby</code> 环境，再去安装 <code>CocoaPods</code> 。</p>
+<h2 id="三、流程"><a href="#三、流程" class="headerlink" title="三、流程"></a>三、流程</h2><h4 id="3-1、准备翻墙梯子"><a href="#3-1、准备翻墙梯子" class="headerlink" title="3.1、准备翻墙梯子"></a>3.1、准备翻墙梯子</h4><p>新的安装流程需要依赖 <code>Homebrew</code> ，而 <code>Homebrew</code> 的安装需要翻墙。</p>
+<h4 id="3-2、安装-Homebrew"><a href="#3-2、安装-Homebrew" class="headerlink" title="3.2、安装 Homebrew"></a>3.2、安装 <code>Homebrew</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># zsh</span><br><span class="line">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span><br><span class="line"></span><br><span class="line"># bash</span><br><span class="line">curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><br></pre></td></tr></table></figure>
+<p>过程可能有点久，而且中途可能会因为某些依赖包下载失败而中断安装，别怕，重试就好。<br>【注】<br>1、梯子需要开启全局代理，不能只开网页代理<br>2、如果开了全局代理依然访问不了 <code>raw.githubusercontent.com</code> 域名，主要是 DNS  域名解析的问题，可以修改 <code>host</code> 解决，参考【附录4.1】。</p>
+<p>安装完成后，根据命令行提示，<code>M1 Mac</code> 需要添加一下环境变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># zsh</span><br><span class="line">echo &quot;eval $(/opt/homebrew/bin/brew shellenv)&quot; &gt;&gt; ~/.zprofile</span><br><span class="line">eval $(/opt/homebrew/bin/brew shellenv)</span><br><span class="line"></span><br><span class="line"># bash</span><br><span class="line">echo &quot;eval $(/opt/homebrew/bin/brew shellenv)&quot; &gt;&gt; ~/.bash_profile</span><br><span class="line">eval $(/opt/homebrew/bin/brew shellenv)</span><br></pre></td></tr></table></figure>
 
-<h3 id="4、执行以下命令进行刷新"><a href="#4、执行以下命令进行刷新" class="headerlink" title="4、执行以下命令进行刷新"></a>4、执行以下命令进行刷新</h3><p><code>source ~/.bash_profile</code></p>
-<h3 id="5、bingo，enjoy！"><a href="#5、bingo，enjoy！" class="headerlink" title="5、bingo，enjoy！"></a>5、bingo，enjoy！</h3><h4 id="【PS：有一个大坑需要注意】"><a href="#【PS：有一个大坑需要注意】" class="headerlink" title="【PS：有一个大坑需要注意】"></a>【PS：有一个大坑需要注意】</h4><p>官方的 <code>git-completion.bash</code> 文件在 <code>2289880f784326dc955f213072164539dcaf445e</code> 提交节点下有问题，无法使用。折腾了好久，最后使用<a target="_blank" rel="noopener" href="https://www.jianshu.com/writer#/notebooks/16792301/notes/29257216">旧版的文件</a>可以使用。</p>
-<h4 id="【2019-5-10更新：大坑已修复】"><a href="#【2019-5-10更新：大坑已修复】" class="headerlink" title="【2019.5.10更新：大坑已修复】"></a>【2019.5.10更新：大坑已修复】</h4><p>迄今为止最新的commit（<code>01f8d78887d45dc10f29d3926d5cc52f78838846</code>）已经可以在（<code>MacOS Mojave 10.14.4</code>） 下正常使用</p>
-<h4 id="【2020-4-22更新】"><a href="#【2020-4-22更新】" class="headerlink" title="【2020.4.22更新】"></a>【2020.4.22更新】</h4><p>Mac OS Catalina 10.15.2 中，终端默认使用的shell脚本是zsh，不是bash。这会导致上面第4步执行失败，报错如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARNING: this script is deprecated, please see git-completion.zsh</span><br></pre></td></tr></table></figure>
-<p>但是Git并没有兼容zsh，所以还是得用回bash。解决办法如下：<br>终端 –&gt; 偏好设置 –&gt; 通用 –&gt; Shell的打开方式，选中【命令（完整的路径）】，设置为：/bin/bash</p>
-<p><img src="images/macOS/git_autoCommand/01.png"></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>1、<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36372074/article/details/73612496">GIT 自动补全命令,分支名 以及 高亮显示当前分支</a><br>2、<a target="_blank" rel="noopener" href="https://gist.github.com/xhlwill/688c92d8a6026085fffe4ab6c97855ae">修改 .bash_profile(mac) 或 .bashrc(linux) 让 terminal 能自动补全 git 命令、显示 git 分支等信息 (git-completion.bash 和 git-prompt.sh 放入 ~ 目录)</a><br>3、<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangt85/article/details/43611997">Mac下git命令自动补全</a></p>
+<p>退出并重启终端，输入 <code>brew doctor</code>，出现以下文案，则表示 <code>Homebrew</code> 安装成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your system is ready to brew</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3、安装-Ruby-版本管理器-chruby-及安装器-ruby-install"><a href="#3-3、安装-Ruby-版本管理器-chruby-及安装器-ruby-install" class="headerlink" title="3.3、安装 Ruby 版本管理器 chruby 及安装器 ruby-install"></a>3.3、安装 <code>Ruby</code> 版本管理器 <code>chruby</code> 及安装器 <code>ruby-install</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install chruby ruby-install</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4、安装-Ruby"><a href="#3-4、安装-Ruby" class="headerlink" title="3.4、安装 Ruby"></a>3.4、安装 <code>Ruby</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby-install ruby</span><br></pre></td></tr></table></figure>
+<p>【注】期间可能出现无法连接 <code>cache.Ruby-Lang.org</code> 域名的情况，同样参考【附录4.1】处理即可。</p>
+<p>安装成功会有以下提示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Successfully installed ruby 3.1.2 into /Users/andyzhen/.rubies/ruby-3.1.2</span><br></pre></td></tr></table></figure>
+<p>但是此时执行 <code>ruby -v</code> 仍会显示系统自带的版本 <code>2.6.x</code>。我们需要添加环境变量使得前面安装的 <code>Ruby</code> 版本管理器 <code>chruby</code> 生效。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># zsh</span><br><span class="line">echo &quot;source /opt/homebrew/opt/chruby/share/chruby/chruby.sh&quot; &gt;&gt; ~/.zshrc</span><br><span class="line">echo &quot;source /opt/homebrew/opt/chruby/share/chruby/auto.sh&quot; &gt;&gt; ~/.zshrc</span><br><span class="line">echo &quot;chruby ruby-3.1.2&quot; &gt;&gt; ~/.zshrc</span><br><span class="line"></span><br><span class="line"># bash</span><br><span class="line">echo &quot;source /opt/homebrew/opt/chruby/share/chruby/chruby.sh&quot; &gt;&gt; ~/.bash_profile</span><br><span class="line">echo &quot;source /opt/homebrew/opt/chruby/share/chruby/auto.sh&quot; &gt;&gt; ~/.bash_profile</span><br><span class="line">echo &quot;chruby ruby-3.1.2&quot; &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>【注】<code>chruby </code> 后面的 <code>Ruby</code> 版本需要填写前面安装成功提示里的版本号。<br>重启终端后再执行 <code>ruby -v</code> ，会显示为我们安装的版本 <code>3.1.x</code> 。</p>
+<h4 id="3-5、安装-CocoaPods"><a href="#3-5、安装-CocoaPods" class="headerlink" title="3.5、安装 CocoaPods"></a>3.5、安装 <code>CocoaPods</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install cocoapods</span><br></pre></td></tr></table></figure>
+<p>【注】如果出现报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Permission denied @ dir_s_mkdir - /Users/YourAccount/.local/share/gem/specs</span><br></pre></td></tr></table></figure>
+<p>系统没有给与创建目录的权限，在前面加上 <code>sudo</code> 即可。<br>安装成功后，输入 <code>pod --version</code> 会显示出我们安装的版本。</p>
+<h4 id="3-6、初始化-CocoaPods"><a href="#3-6、初始化-CocoaPods" class="headerlink" title="3.6、初始化 CocoaPods"></a>3.6、初始化 <code>CocoaPods</code></h4><p>官方的方法 <code>pod setup</code> 已失效，会直接提示 <code>Setup completed</code> ，而不会有任何下载动作，执行 <code>pod repo list</code> 也显示 <code>0 repos</code> 。我们把 github 上的官方 repo 手动下载下来并放到官方指定目录下即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/CocoaPods/Specs.git ~/.cocoapods/repos/trunk</span><br></pre></td></tr></table></figure>
+<p>下载完成后，执行 <code>pod repo list</code> 会显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">trunk</span><br><span class="line">- Type: CDN</span><br><span class="line">- URL:  https://cdn.cocoapods.org/</span><br><span class="line">- Path: /Users/andyzhen/.cocoapods/repos/trunk</span><br><span class="line"></span><br><span class="line">1 repo</span><br></pre></td></tr></table></figure>
+<p>执行 <code>pod search sdwebimage</code> 也会有所显示。</p>
+<p><strong>至此，恭喜你，<code>CocoaPods</code> 终于安装完成了！</strong></p>
+<h2 id="四、附录"><a href="#四、附录" class="headerlink" title="四、附录"></a>四、附录</h2><h4 id="4-1、通过修改-host-在终端访问浏览器里能访问的网站"><a href="#4-1、通过修改-host-在终端访问浏览器里能访问的网站" class="headerlink" title="4.1、通过修改 host 在终端访问浏览器里能访问的网站"></a>4.1、通过修改 <code>host</code> 在终端访问浏览器里能访问的网站</h4><p>1、在 <a target="_blank" rel="noopener" href="https://www.ipaddress.com/">https://www.ipaddress.com</a> 中输入你要访问的域名<br>2、选择其中一个 ipv4 的地址<br>3、打开 <code>/etc/host</code> 文件，参照样例格式将 ip 和 域名添加到末尾，并保存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##</span><br><span class="line"># Host Database</span><br><span class="line">#</span><br><span class="line"># localhost is used to configure the loopback interface</span><br><span class="line"># when the system is booting.  Do not change this entry.</span><br><span class="line">##</span><br><span class="line">127.0.0.1	localhost</span><br><span class="line">255.255.255.255	broadcasthost</span><br><span class="line">::1             localhost</span><br><span class="line">185.199.108.133 raw.githubusercontent.com</span><br><span class="line">199.232.69.178  cache.Ruby-Lang.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、参考"><a href="#五、参考" class="headerlink" title="五、参考"></a>五、参考</h2><p>1、<a target="_blank" rel="noopener" href="https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#start-here-if-you-choose-the-long-and-manual-route">The fastest and easiest way to install Ruby on a Mac in 2022</a><br>2、<a target="_blank" rel="noopener" href="https://www.moncefbelyamani.com/the-definitive-guide-to-installing-ruby-gems-on-a-mac/#install-ruby-with-a-version-manager-best-option">Install Ruby on Mac. The Definitive Guide for 2022.</a><br>3、<a target="_blank" rel="noopener" href="https://www.moncefbelyamani.com/you-don-t-have-write-permissions-for-the-library-ruby-gems-2-6-0-directory/">You don’t have write permissions for the /Library/Ruby/Gems/2.6.0 directory</a><br>4、<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44293949/article/details/121863559">解决raw.githubusercontent.com无法访问的问题</a><br>5、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f43b5964f582">CocoaPods安装方法-2022.05.30</a></p>
 
       
     </div>
@@ -278,7 +293,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/28/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/iOS_font_bold/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/icon_az/logo.png">
@@ -292,7 +307,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/12/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/2022/12/30/iOS/iOS_font_bold/" class="post-title-link" itemprop="url">iOS中的加粗字体</a>
         </h2>
 
         <div class="post-meta">
@@ -301,8 +316,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-12-28 23:39:59" itemprop="dateCreated datePublished" datetime="2022-12-28T23:39:59+08:00">2022-12-28</time>
+              <time title="创建时间：2022-12-30 20:41:34 / 修改时间：20:48:06" itemprop="dateCreated datePublished" datetime="2022-12-30T20:41:34+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
             </span>
 
           
@@ -316,19 +341,806 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+          <h3 id="1-iOS系统有2个API可以设置加粗的字体"><a href="#1-iOS系统有2个API可以设置加粗的字体" class="headerlink" title="1. iOS系统有2个API可以设置加粗的字体"></a>1. iOS系统有2个API可以设置加粗的字体</h3><p>1、常用的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIFont boldSystemFontOfSize:20]</span><br></pre></td></tr></table></figure>
+<p>2、iOS 8.2新增的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIFont systemFontOfSize:20 weight:UIFontWeightBold]</span><br></pre></td></tr></table></figure>
+<p>其中，weight 参数是个 <code>CGFloat</code> 类型的枚举值，包含以下枚举</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">UIFontWeightUltraLight</span><br><span class="line">UIFontWeightThin </span><br><span class="line">UIFontWeightLight </span><br><span class="line">UIFontWeightRegular </span><br><span class="line">UIFontWeightMedium </span><br><span class="line">UIFontWeightSemibold </span><br><span class="line">UIFontWeightBold </span><br><span class="line">UIFontWeightHeavy </span><br><span class="line">UIFontWeightBlack </span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>那么我们常用的 <code>boldSystemFontOfSize </code> 对应的 <code>weight</code> 是多少呢？经过测试，得到以下结果</p>
+<table>
+<thead>
+<tr>
+<th align="center">api</th>
+<th align="center">weight</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">boldSystemFontOfSize</td>
+<td align="center">0.3</td>
+</tr>
+<tr>
+<td align="center">UIFontWeightSemibold</td>
+<td align="center">0.3</td>
+</tr>
+<tr>
+<td align="center">UIFontWeightBold</td>
+<td align="center">0.4</td>
+</tr>
+</tbody></table>
+<h4 id="结论：可以看到，苹果给我们开了个玩笑，系统默认的加粗字体对应的-weight-是-UIFontWeightSemibold，而不是-UIFontWeightBold"><a href="#结论：可以看到，苹果给我们开了个玩笑，系统默认的加粗字体对应的-weight-是-UIFontWeightSemibold，而不是-UIFontWeightBold" class="headerlink" title="结论：可以看到，苹果给我们开了个玩笑，系统默认的加粗字体对应的 weight 是 UIFontWeightSemibold，而不是 UIFontWeightBold"></a><strong>结论：可以看到，苹果给我们开了个玩笑，系统默认的加粗字体对应的 <code>weight</code> 是 <code>UIFontWeightSemibold</code>，而不是 <code>UIFontWeightBold</code></strong></h4><h3 id="2-Hippy-iOS-中的加粗字体"><a href="#2-Hippy-iOS-中的加粗字体" class="headerlink" title="2. Hippy-iOS 中的加粗字体"></a>2. Hippy-iOS 中的加粗字体</h3><p>hippy 中通过 <code>fontWeight: &quot;bold&quot;</code> 设置的加粗字体，得到的 <code>weight</code> 是 0.4，源码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">// HippyFont.mm</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">#if !defined(__IPHONE_8_2) || __IPHONE_OS_VERSION_MIN_REQUIRED &lt; __IPHONE_8_2</span><br><span class="line"></span><br><span class="line">// These constants are defined in iPhone SDK 8.2, but the app cannot run on</span><br><span class="line">// iOS &lt; 8.2 unless we redefine them here. If you target iOS 8.2 or above</span><br><span class="line">// as a base target, the standard constants will be used instead.</span><br><span class="line">// These constants can only be removed when Hippy Native drops iOS8 support.</span><br><span class="line"></span><br><span class="line">#define UIFontWeightUltraLight -0.8</span><br><span class="line">#define UIFontWeightThin -0.6</span><br><span class="line">#define UIFontWeightLight -0.4</span><br><span class="line">#define UIFontWeightRegular 0</span><br><span class="line">#define UIFontWeightMedium 0.23</span><br><span class="line">#define UIFontWeightSemibold 0.3</span><br><span class="line">#define UIFontWeightBold 0.4</span><br><span class="line">#define UIFontWeightHeavy 0.56</span><br><span class="line">#define UIFontWeightBlack 0.62</span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    static NSDictionary *nameToWeight;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        nameToWeight = @&#123;</span><br><span class="line">            @&quot;normal&quot;: @(UIFontWeightRegular),</span><br><span class="line">            @&quot;bold&quot;: @(UIFontWeightBold),</span><br><span class="line">            @&quot;ultralight&quot;: @(UIFontWeightUltraLight),</span><br><span class="line">            @&quot;thin&quot;: @(UIFontWeightThin),</span><br><span class="line">            @&quot;light&quot;: @(UIFontWeightLight),</span><br><span class="line">            @&quot;regular&quot;: @(UIFontWeightRegular),</span><br><span class="line">            @&quot;medium&quot;: @(UIFontWeightMedium),</span><br><span class="line">            @&quot;semibold&quot;: @(UIFontWeightSemibold),</span><br><span class="line">            @&quot;bold&quot;: @(UIFontWeightBold),</span><br><span class="line">            @&quot;heavy&quot;: @(UIFontWeightHeavy),</span><br><span class="line">            @&quot;black&quot;: @(UIFontWeightBlack),</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="结论：如果hippy需要对齐iOS系统默认的加粗字体，在设置加粗样式时需要使用-fontWeight-quot-semibold-quot"><a href="#结论：如果hippy需要对齐iOS系统默认的加粗字体，在设置加粗样式时需要使用-fontWeight-quot-semibold-quot" class="headerlink" title="结论：如果hippy需要对齐iOS系统默认的加粗字体，在设置加粗样式时需要使用 fontWeight: &quot;semibold&quot;"></a><strong>结论：如果hippy需要对齐iOS系统默认的加粗字体，在设置加粗样式时需要使用 <code>fontWeight: &quot;semibold&quot;</code></strong></h4>
+      
+    </div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/macOS/git_useful_cmd/">
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/macOS/git_useful_cmd/" class="post-title-link" itemprop="url">git实用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:45:08 / 修改时间：18:50:19" itemprop="dateCreated datePublished" datetime="2022-12-30T18:45:08+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="常规基本操作"><a href="#常规基本操作" class="headerlink" title="常规基本操作"></a>常规基本操作</h1><ul>
+<li><h3 id="Git克隆某一个特定的远程分支"><a href="#Git克隆某一个特定的远程分支" class="headerlink" title="Git克隆某一个特定的远程分支"></a>Git克隆某一个特定的远程分支</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone -b &lt;分支名&gt; &lt;仓库地址&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="修改最后一次提交"><a href="#修改最后一次提交" class="headerlink" title="修改最后一次提交"></a>修改最后一次提交</h3><p>有时候我们提交完了才发现漏掉了几个文件没有加，或者提交信息写错了。想要撤消刚才的提交操作，可以使用 –amend选项重新提交：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="抓取"><a href="#抓取" class="headerlink" title="抓取"></a>抓取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 刷新远程仓库的信息</span><br><span class="line">$ git fetch origin</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull --rebase origin &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;分支名&gt;</span><br><span class="line">$ git push origin serverfix:serferfix  //上传我本地的 serverfix 分支到远程仓库中去，仍旧称它为 serverfix 分支</span><br><span class="line">$ git push origin serverfix:awesomebranch  //把本地分支推送到某个命名不同的远程分支</span><br></pre></td></tr></table></figure></li>
+<li><p>-force 加上该参数，会用本地的版本信息强行覆盖远端的版本信息，配合git reset –hard HEAD^ 使用可撤销远端的commit</p>
+</li>
+<li><h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push [远程名] :[分支名]</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git mv fileA fileB</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h1><ul>
+<li><h3 id="查询某人的提交记录"><a href="#查询某人的提交记录" class="headerlink" title="查询某人的提交记录"></a>查询某人的提交记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log  --author=””</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查询某文件的提交记录"><a href="#查询某文件的提交记录" class="headerlink" title="查询某文件的提交记录"></a>查询某文件的提交记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log &lt;file&gt;</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查看所有分支的提交记录"><a href="#查看所有分支的提交记录" class="headerlink" title="查看所有分支的提交记录"></a>查看所有分支的提交记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --all</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="以类似sourcetree的图形形式查看log历史"><a href="#以类似sourcetree的图形形式查看log历史" class="headerlink" title="以类似sourcetree的图形形式查看log历史"></a>以类似sourcetree的图形形式查看log历史</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="查看远程仓库的日志"><a href="#查看远程仓库的日志" class="headerlink" title="查看远程仓库的日志"></a>查看远程仓库的日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ git log origin/master --oneline -n 3</span><br><span class="line"></span><br><span class="line">	-(n)				仅显示最近的 n 条提交</span><br><span class="line">	--since, --after 	仅显示指定时间之后的提交。</span><br><span class="line">	--until, --before 	仅显示指定时间之前的提交。</span><br><span class="line">	--author 			仅显示指定作者相关的提交。</span><br><span class="line">	--committer 		仅显示指定提交者相关的提交。</span><br><span class="line">	-p 					按补丁格式显示每个更新之间的差异。</span><br><span class="line">	--stat 				显示每次更新的文件修改统计信息。</span><br><span class="line">	--shortstat 		只显示 --stat 中最后的行数修改添加移除统计。</span><br><span class="line">	--name-only 		仅在提交信息后显示已修改的文件清单。</span><br><span class="line">	--name-status 		显示新增、修改、删除的文件清单。</span><br><span class="line">	--abbrev-commit 	仅显示 SHA-1 的前几个字符，而非所有的 40 个字符。</span><br><span class="line">	--relative-date 	使用较短的相对时间显示（比如，“2 weeks ago”）。</span><br><span class="line">	--graph 			显示 ASCII 图形表示的分支合并历史。</span><br><span class="line">	--pretty 			使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1328069733264.html">选项说明参考此文</a></p>
+</li>
+<li><h3 id="统计代码行数"><a href="#统计代码行数" class="headerlink" title="统计代码行数"></a>统计代码行数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --author=&quot;andy.zhen&quot; --since ==2019-6-24 --until=2019-6-29 --pretty=tformat: --numstat | awk &#x27;&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf &quot;added lines: %s, removed lines: %s, total lines: %s\n&quot;, add, subs, loc &#125;&#x27; -</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查看操作记录"><a href="#查看操作记录" class="headerlink" title="查看操作记录"></a>查看操作记录</h3><p>可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录，git log则不能察看已经删除了的commit记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout &lt;name&gt;</span><br><span class="line">	切换分支</span><br><span class="line">$ git checkout -b &lt;name&gt;</span><br><span class="line">	创建+切换分支</span><br><span class="line">$ git checkout -b [分支名] [远程名]/[分支名]</span><br><span class="line">$ git checkout -b sf origin/serverfix</span><br><span class="line">	现在你的本地分支 sf 会自动向 origin/serverfix 推送和抓取数据了</span><br><span class="line"></span><br><span class="line">$ git branch</span><br><span class="line">	查看分支</span><br><span class="line">$ git branch &lt;name&gt;</span><br><span class="line">	创建分支</span><br><span class="line">$ git branch -v</span><br><span class="line">	查看各个分支最后一个提交对象的信息</span><br><span class="line">$ git branch --merged</span><br><span class="line">	查看哪些分支已被并入当前分支</span><br><span class="line">$ git branch --no-merged</span><br><span class="line">	查看还未合并进来的分支</span><br><span class="line">$ git branch -d &lt;name&gt;</span><br><span class="line">	删除本地分支</span><br><span class="line">$ git branch -D &lt;name&gt;</span><br><span class="line">	强制删除本地分支</span><br><span class="line">$ git branch --set-upstream-to=origin/[远程分支名]  [本地分支名]</span><br><span class="line">	设置本地分支与远程分支的映射关系</span><br><span class="line"></span><br><span class="line">$ git merge &lt;name&gt;</span><br><span class="line">	合并某分支到当前分支</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="暂存"><a href="#暂存" class="headerlink" title="暂存"></a>暂存</h1><ul>
+<li><h3 id="暂存区"><a href="#暂存区" class="headerlink" title="暂存区"></a>暂存区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git add &lt;file&gt;</span><br><span class="line">	将修改添加到暂存区</span><br><span class="line">$ git add .</span><br><span class="line">	将所有修改添加到暂存区</span><br><span class="line"></span><br><span class="line">$ git checkout -- &lt;file&gt;</span><br><span class="line">	丢弃未暂存的某个文件的修改</span><br><span class="line">$ git checkout .</span><br><span class="line">	丢弃未暂存的所有文件的修改</span><br><span class="line"></span><br><span class="line">$ git reset HEAD &lt;file&gt;</span><br><span class="line">	取消已经暂存的文件</span><br><span class="line">$ git reset --hard HEAD^</span><br><span class="line">	撤销本地的上一次提交，</span><br><span class="line">	--hard 源码也会回退到某个版本，commit和index 都回回退到某个版本。（注意，这种方式是改变本地代码仓库源码）</span><br><span class="line">	--soft 保留源码，只回退到commit 信息到某个版本，不涉及index的回退，如果还需要提交，直接commit即可</span><br><span class="line">	HRAD^ 表示上一个提交，HEAD^^ 表示上上个提交，也可表示为 HEAD~2，以此类推</span><br><span class="line">	git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit。reset 是在正常的commit历史中，删除了指定的commit，这时 HEAD 是向后移动了，而 revert 是在正常的commit历史中再commit一次，只不过是反向提交，他的 HEAD 是一直向前的</span><br></pre></td></tr></table></figure>
+<p>【参考】<a target="_blank" rel="noopener" href="http://yijiebuyi.com/blog/8f985d539566d0bf3b804df6be4e0c90.html">git reset revert 回退回滚取消提交返回上一版本</a></p>
+</li>
+<li><h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">	查看未暂存的更新</span><br><span class="line">$ git diff --cached</span><br><span class="line">	查看已暂存的更新</span><br><span class="line">$ git diff HEAD -- &lt;name&gt;</span><br><span class="line">	查看工作区和版本库里面最新版本的区别</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+</li>
+<li><h3 id="保存未提交的修改"><a href="#保存未提交的修改" class="headerlink" title="保存未提交的修改"></a>保存未提交的修改</h3><p>git stash 可用来暂存当前正在进行的工作， 比如想 pull 最新代码， 又不想加新commit， 或者另外一种情况，为了fix 一个紧急的bug,  先stash, 使返回到自己上一个commit, 改完bug之后再stash pop, 继续原来的工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$git stash</span><br><span class="line">$git stash pop</span><br><span class="line">$git stash list</span><br></pre></td></tr></table></figure></li>
+<li><h3 id="跟踪或取消跟踪文件"><a href="#跟踪或取消跟踪文件" class="headerlink" title="跟踪或取消跟踪文件"></a>跟踪或取消跟踪文件</h3></li>
+</ul>
+<p>1、当被跟踪的文件里面有不想跟踪的文件时，使用命令git rm删除文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached readme1.txt    删除readme1.txt的跟踪，并保留在本地。</span><br><span class="line">git rm --f readme1.txt    删除readme1.txt的跟踪，并且删除本地文件。</span><br><span class="line">然后git commit即可。</span><br></pre></td></tr></table></figure>
+<p>2、每次用git status查看状态时总是列出未被跟踪的文件，可以通过.gitignore文件达到目的。语法如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/mtk/ 过滤整个文件夹</span><br><span class="line"></span><br><span class="line">*.zip 过滤所有.zip文件</span><br><span class="line"></span><br><span class="line">/mtk/do.c 过滤某个具体文件</span><br></pre></td></tr></table></figure>
+<p>3、删除未被跟踪的文件或文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 查看将要被删除的未跟踪文件</span><br><span class="line">$ git clean -n</span><br><span class="line">// 删除未跟踪文件</span><br><span class="line">$ git clean -f</span><br><span class="line">// 如果要操作的对象是文件夹，则在后面加上 -d 参数</span><br><span class="line">$ git clean -n -d</span><br><span class="line">$ git clean -f -d</span><br></pre></td></tr></table></figure>
+<p>最后需要强调的一点是，如果你不慎在创建.gitignore文件之前就commit了项目，那么即使你在.gitignore文件中写入新的过滤规则，这些规则也不会起作用，Git仍然会对所有文件进行版本管理。<br><em><strong>此时要想新的规则生效，需要执行第1种情况里的步骤</strong></em></p>
+<p>【参考】<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5cf72a7e2bbf">Git——跟踪或取消跟踪文件</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/76c93dd3eaad">移除git下的untracked files</a></p>
+<h1 id="为所欲为的rebase"><a href="#为所欲为的rebase" class="headerlink" title="为所欲为的rebase"></a>为所欲为的rebase</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i  [startpoint]  [endpoint]</span><br></pre></td></tr></table></figure>
+<p>可以对某一段线性提交历史进行编辑、删除、合并、拆分、重排序等<br><strong>可不指定endpoint，但是startpoint是开集，不包含startpoint的commitid</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase   [startpoint]   [endpoint]  --onto  [branchName]</span><br></pre></td></tr></table></figure>
+<p>指定当前分支的一个编辑区间(前开后闭)，复制粘贴到指定分支<br>这里重点记录一下参考文章中没提到的拆分、重排序操作</p>
+<ul>
+<li>一个commit拆分成多个<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、使用 git rebase -i commitid 后，在需要拆分的 commitid 处，将 pick 修改为 edit 或 e</span><br><span class="line">2、使用 git reset --soft HEAD^ 将当前 commit 重置到暂存区</span><br><span class="line">3、将代码分别 commit</span><br><span class="line">4、执行 git rebase --continue，大功告成</span><br></pre></td></tr></table></figure></li>
+<li>commit 重排序<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、执行 git rebase -i commitid </span><br><span class="line">2、在编辑区，将几个commit的位置变换。剪切无法使用，只能手工选中、复制、粘贴、删除</span><br><span class="line">3、保存退出，大功告成</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>【参考】<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4a8f4af4e803">【Git】rebase 用法小结</a></p>
+<h1 id="git对象"><a href="#git对象" class="headerlink" title="git对象"></a>git对象</h1><p>tree 对应目录快照，blob 对应文件快照（与文件名无关）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 查看对象类型</span><br><span class="line">$ git cat-file -t objid</span><br><span class="line">// 查到对象内容</span><br><span class="line">$ git cat-file -p objid</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<h2 id="Danger-Zone"><a href="#Danger-Zone" class="headerlink" title="Danger Zone"></a>Danger Zone</h2><p>【参考】<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/811b07b129e8">git同步远程仓库分支</a></p>
+</blockquote>
+<h4 id="1、本地删除了分支，远程也想删除。"><a href="#1、本地删除了分支，远程也想删除。" class="headerlink" title="1、本地删除了分支，远程也想删除。"></a>1、本地删除了分支，远程也想删除。</h4><ul>
+<li>相关命令：</li>
+</ul>
+<p>1.删除远程分支: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin -d 分支名</span><br></pre></td></tr></table></figure>
+<p>2.删除本地分支: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体情况：</li>
+</ul>
+<p><strong>a.假如我在本地想要删除某个分支，我也想把远程仓库的这个分支也要删掉怎么办？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.使用git branch -d 分支名来删除本地分支。</span><br><span class="line">2.使用git push origin -d 分支名直接来删除远程分支。再次使用git branch -a,发现分支已经不存在了。</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">1.使用git branch -d 分支名来删除本地分支。</span><br><span class="line">2.最简单的解决办法就是直接到gitlab/github进行删除。</span><br></pre></td></tr></table></figure>
+
+<p><strong>b.假如我只想把远程的删除掉怎么办？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.使用git push origin -d 分支名直接来删除远程分支。此时删除的只是远程的分支，本地仍然存在</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">1.直接到gitlab/github进行删除</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、远程删除了分支，本地也想删除"><a href="#2、远程删除了分支，本地也想删除" class="headerlink" title="2、远程删除了分支，本地也想删除"></a>2、远程删除了分支，本地也想删除</h4><ul>
+<li>相关命令：</li>
+</ul>
+<p>1.查看远程分支和本地分支的对应关系: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote show origin  </span><br></pre></td></tr></table></figure>
+<p>2.删除远程已经删除过的分支: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote prune origin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>具体情况：</li>
+</ul>
+<p>假如我直接到 gitlab/github 删除了某个分支，我在本地使用 git branch -a 查看远程分支，依然存在并且可以切换使用。我本地也想把远程分支记录删除怎么办？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.git branch -a 查看远程分支，红色的是本地远程远程分支记录。</span><br><span class="line">2.执行下面命令查看远程仓库分支和本地仓库的远程分支记录的对应关系：</span><br><span class="line">    git remote show origin  </span><br><span class="line">3.会看到：refs/remotes/origin/远程仓库已经删除的分支名              stale (use &#x27;git remote prune&#x27; to remove)</span><br><span class="line">    其中：Local refs configured for &#x27;git push&#x27;:  命令下面的分支是本地仓库的远程分支记录中仍存在的分支，但远程仓库已经不存在。</span><br><span class="line">4.输入git remote prune origin 来删除远程仓库已经删除过的分支</span><br><span class="line">5.验证 git branch -a</span><br><span class="line"></span><br><span class="line">此时可以看到本地远程分支记录已经和远程仓库保持一致了。</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/presentVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/presentVC/" class="post-title-link" itemprop="url">presentVC小结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:40:20 / 修改时间：18:42:20" itemprop="dateCreated datePublished" datetime="2022-12-30T18:40:20+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="⚠️⚠️⚠️本文仅讨论-viewControllerToPresent-modalPresentationStyle-UIModalPresentationOverCurrentContext-的情况"><a href="#⚠️⚠️⚠️本文仅讨论-viewControllerToPresent-modalPresentationStyle-UIModalPresentationOverCurrentContext-的情况" class="headerlink" title="⚠️⚠️⚠️本文仅讨论 viewControllerToPresent.modalPresentationStyle = UIModalPresentationOverCurrentContext 的情况"></a><strong>⚠️⚠️⚠️本文仅讨论 <code>viewControllerToPresent.modalPresentationStyle = UIModalPresentationOverCurrentContext</code> 的情况</strong></h1><h3 id="规则1"><a href="#规则1" class="headerlink" title="规则1"></a>规则1</h3><p>从源VC开始往父VC去找，谁是第一个定义了<code>self.definesPresentationContext = YES</code>的，谁就是 presentationContext<br>都没找到，那就是 rootVC</p>
+<h3 id="规则2"><a href="#规则2" class="headerlink" title="规则2"></a>规则2</h3><p>凡是包含在 presentationContext 里的 VC，包括 presentationContext 对应的VC 及其展示出来的子VC，执行 <code>self.presentedViewController</code> 都会得到当前被 present 出来的VC</p>
+<h3 id="规则3"><a href="#规则3" class="headerlink" title="规则3"></a>规则3</h3><p>当被 present 出来的VC present 和 dismiss 后，凡是包含在 presentationContext 里的 VC，包括 presentationContext 对应的VC 及其展示出来的子VC<br>⚠️⚠️⚠️都<em><strong>不会触发</strong></em> <code>viewWillAppear</code> 和 <code>viewWillDisappear</code> 方法</p>
+<p>当modalPresentationStyle为UIModalPresentationFullScreen、UIModalPresentationOverFullScreen等模式时，才会触发</p>
+<blockquote>
+<p>UIKit搜索presentation context的顺序为： </p>
+<ol>
+<li>presenting VC </li>
+<li>presenting VC 的父VC </li>
+<li>presenting VC 所属的container VC </li>
+<li>rootViewController</li>
+</ol>
+<p>还有另外一种特殊情况，当我们在一个presented VC上再present一个VC时，UIKit会直接将这个presented VC做为presentation context。</p>
+</blockquote>
+<p>【参考】<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianweitao/article/details/80314598">详解iOS的presentViewController</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/cocoapods_install_use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/cocoapods_install_use/" class="post-title-link" itemprop="url">cocoapods安装与使用小结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:27:56 / 修改时间：20:27:54" itemprop="dateCreated datePublished" datetime="2022-12-30T18:27:56+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h3><h4 id="1、更新Ruby"><a href="#1、更新Ruby" class="headerlink" title="1、更新Ruby"></a>1、更新Ruby</h4><blockquote>
+<p>安装需要用到Ruby，虽然Mac自带了Ruby，不过版本有点老了，最好更新一下。（测试不更新也是可以的）</p>
+</blockquote>
+<ul>
+<li><p>查看当前Ruby版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem --version</span><br></pre></td></tr></table></figure></li>
+<li><p>更换源（因为Ruby的软件源rubygems.org被屏蔽了，国内那无形之墙，我们需要来修改更换源，把源切换至ruby-china；网上大多数是使用的<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://ruby.taobao.org">https://ruby.taobao.org</a>的，这里不再建议使用的了，这是因为taobao Gems 源已停止维护，现由 ruby-china 提供镜像服务）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/</span><br></pre></td></tr></table></figure>
+<p>【2020.9.5更新】<code>gems.ruby-china.org</code> 不好用了， 可用的源为：<code>https://mirrors.tuna.tsinghua.edu.cn/rubygems/</code></p>
+</li>
+<li><p>查看源路径是否替换成功。请确保只有 gems.ruby-china.org! *，然后方可更新Ruby</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem sources -l</span><br></pre></td></tr></table></figure></li>
+<li><p>更新Ruby</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem update --system</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2、安装Cocoapods"><a href="#2、安装Cocoapods" class="headerlink" title="2、安装Cocoapods"></a>2、安装Cocoapods</h4><ul>
+<li><p>安装Cocoapods</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
+<p>如果出现以下报错：<br><img src="/images/iOS/cocoapods_install_use/01.png" alt="来自本人电脑"><br>修改安装命令为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install -n /usr/local/bin cocoapods</span><br></pre></td></tr></table></figure></li>
+<li><p>查看版本号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod --version</span><br></pre></td></tr></table></figure></li>
+<li><p>设置官方仓库源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod setup</span><br></pre></td></tr></table></figure></li>
+<li><p>卸载当前版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem uninstall cocoapods</span><br></pre></td></tr></table></figure></li>
+<li><p>下载指定版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install cocoapods -v 1.6.1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="二、私有源"><a href="#二、私有源" class="headerlink" title="二、私有源"></a>二、私有源</h3><ul>
+<li><p>查看本地已存在的仓库源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo list</span><br></pre></td></tr></table></figure></li>
+<li><p>添加私有仓库（私有Spec Repo）<br>此命令不仅仅添加对应的私有仓库源，还会将源都clone到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo add [私有Pod源仓库名字] [私有Pod源的repo地址]</span><br></pre></td></tr></table></figure></li>
+<li><p>删除私有仓库（私有Spec Repo）<br>clone 到本地的所有库文件都会同时删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo remove [私有Pod源仓库名字]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="三、更新podspec"><a href="#三、更新podspec" class="headerlink" title="三、更新podspec"></a>三、更新podspec</h3><ul>
+<li><p>添加tag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag 0.0.1  //要跟podspec中的version保持一致</span><br></pre></td></tr></table></figure></li>
+<li><p>推送tag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master --tags</span><br></pre></td></tr></table></figure></li>
+<li><p>验证修改后的仓库和仓库对应的podspec文件<br>在当前仓库代码下执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint --allow-warnings</span><br></pre></td></tr></table></figure></li>
+<li><p>本地测试podspec文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">platform :ios, &#x27;7.0&#x27;</span><br><span class="line"></span><br><span class="line">pod &#x27;PodTestLibrary&#x27;, :path =&gt; &#x27;~/code/Cocoapods/podTest/PodTestLibrary&#x27;      # 指定路径</span><br><span class="line">pod &#x27;PodTestLibrary&#x27;, :podspec =&gt; &#x27;~/code/Cocoapods/podTest/PodTestLibrary/PodTestLibrary.podspec&#x27;  # 指定podspec文件</span><br></pre></td></tr></table></figure></li>
+<li><p>向Spec Repo提交podspec</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push WTSpecs PodTestLibrary.podspec  #前面是本地Repo名字 后面是podspec名字</span><br></pre></td></tr></table></figure>
+<p>如果遇到警告，也可以在后面添加命令参数 <code>--allow-warnings</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push WTSpecs PodTestLibrary.podspec --allow-warnings</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="四、在单元测试工程target中集成pod库"><a href="#四、在单元测试工程target中集成pod库" class="headerlink" title="四、在单元测试工程target中集成pod库"></a>四、在单元测试工程target中集成pod库</h3><p>1、修改podfile文件，增加以下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target &#x27;XXXProjectTests&#x27; do</span><br><span class="line">  </span><br><span class="line">  pod &#x27;XXXSDK&#x27;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>2、关闭当前工程的xcode窗口，删除当前工程的 workspace 文件，然后重新执行 <code>pod install</code> 。执行成功后，会在pod工程下的 <code>Target Support Files</code> 下生成 <code>pod-xxxxTests</code> 文件夹</p>
+<h3 id="五、常见问题"><a href="#五、常见问题" class="headerlink" title="五、常见问题"></a>五、常见问题</h3><p><strong>1、<code>pod repo update master</code> 因速度非常慢而更新失败</strong><br>解决方案：<br>1、开启翻墙代理<br>2、电脑连手机4g热点<br>3、设置git全局代理为翻墙代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy socks5://127.0.0.1:1086</span><br><span class="line">git config --global http.https://github.com.proxy socks5://127.0.0.1:1086</span><br></pre></td></tr></table></figure>
+<p>注意，上面的端口号是自己的代理的端口<br><img src="/images/iOS/cocoapods_install_use/02.png" alt="shadow socks高级设置"><br>4、执行pod update，binggo<br>【参考】<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/bf26e92ec5b1">pod repo update速度慢</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>1、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1e7ab521000b">最新cocoapods详细安装</a><br>2、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/83dc05c19c9f">组件化和私有pod源仓库</a><br>3、<a target="_blank" rel="noopener" href="http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/">使用Cocoapods创建私有podspec</a><br>4、<a target="_blank" rel="noopener" href="https://blog.csdn.net/lwb102063/article/details/98947336">IOS开发中使用单元测试(OCUnit)测试集成pod库工程中的一些问题以及解决方案</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/nsproxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/nsproxy/" class="post-title-link" itemprop="url">NSProxy使用小结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:23:17 / 修改时间：18:24:32" itemprop="dateCreated datePublished" datetime="2022-12-30T18:23:17+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><p>NSProxy 是个虚类，同时是所有虚类的基类，地位类比 NSObject</p>
+</li>
+<li><p>NSProxy 提供了 alloc 方法，但是没有提供 init 方法，所有集成它的子类都需要自己实现初始化方法</p>
+</li>
+<li><p>NSProxy 主要用于  <em><strong>消息转发</strong></em>  的场景。所以它提供了两个消息转发相关的接口，所有子类都必须实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (void)forwardInvocation:(NSInvocation *)invocation;</span><br><span class="line">- (nullable NSMethodSignature *)methodSignatureForSelector:(SEL)sel;</span><br></pre></td></tr></table></figure></li>
+<li><p>当定义的protocol在一个独立的头文件时，proxy 声明实现它但是没有提供真正的实现方法时，编译器不会报错</p>
+</li>
+</ul>
+<p>【参考】<br>1、<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014084081/article/details/77084356">NSProxy</a><br>2、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8e700673202b">NSProxy——少见却神奇的类</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/https_ssl_handshake/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/https_ssl_handshake/" class="post-title-link" itemprop="url">HTTPS第四次握手总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:16:08 / 修改时间：18:17:45" itemprop="dateCreated datePublished" datetime="2022-12-30T18:16:08+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>目标：安全<br>关键字：SSL/TLS<br>关键算法：hash，对称加密，非对称加密<br>关键点：对称密钥的生成和传输</p>
+<p>所以整个网络数据包的安全性转化成了<strong>对称密钥的安全性</strong>，为了达到此目的，采用以下措施：<br><em><strong>1、随机数</strong></em>：3个随机数，防止暴力破解<br><em><strong>2、加密算法</strong></em>：server需在client支持的算法列表中挑选一个<br><em><strong>3、传输安全性</strong></em>：对称密钥不在网络中传输，而改为传输随机数，然后双方用协商好的算法各自生成相同的对称密钥</p>
+<h3 id="综上，SSL握手的过程如下："><a href="#综上，SSL握手的过程如下：" class="headerlink" title="综上，SSL握手的过程如下："></a>综上，SSL握手的过程如下：</h3><h4 id="hello阶段"><a href="#hello阶段" class="headerlink" title="hello阶段"></a>hello阶段</h4><p>1、client发送ssl版本号、支持的算法列表、随机数random1给server<br>2、server发送选中的算法、随机数random2给client<br>3、server发送自身证书（包含非对称公钥）给client<br>4、server发送确认消息给client，告知握手消息发送完成</p>
+<h4 id="exchange阶段"><a href="#exchange阶段" class="headerlink" title="exchange阶段"></a>exchange阶段</h4><p>5、client验证server证书<br>6、client生成随机数random3，并计算pre-master key（使用server的公钥加密）给server。server解密得到随机数random3，通过计算random1、2、3得到对称密钥key</p>
+<h4 id="test阶段"><a href="#test阶段" class="headerlink" title="test阶段"></a>test阶段</h4><p>7、client向server发送明文消息，标明之后发的消息开始启用加密<br>8、client向server发送密文消息<br>9、server解密成功后也向client发送步骤7一样的消息<br>10、server向client发送密文消息<br>11、应用数据加密传输</p>
+<h3 id="中间人攻击原理："><a href="#中间人攻击原理：" class="headerlink" title="中间人攻击原理："></a>中间人攻击原理：</h3><p>1、将自己伪装成client跟server握手并通讯<br>2、将自己伪装成server跟client握手并通讯</p>
+<p>由于现在大部分HTTPS都是单向认证，即只有client验证server，server不验证client，所以第一点无压力，关键在于第二点，伪装成server的时候如何让client验证通过，只要client信任了自己下发的证书，就可以顺利解密client发给server的密文了。这也是为什么抓包工具在抓HTTPS的包时一定要安装并信任它的证书。</p>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7158568e4867">SSL/TLS 握手过程详解</a><br><a target="_blank" rel="noopener" href="https://www.2cto.com/article/201607/523509.html">浅析HTTPS中间人攻击与证书校验</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/thread_idle_async/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/thread_idle_async/" class="post-title-link" itemprop="url">不阻塞线程的另一种技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 18:10:46 / 修改时间：18:12:48" itemprop="dateCreated datePublished" datetime="2022-12-30T18:10:46+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p>在线程空闲时去执行</p>
+<h3 id="方案："><a href="#方案：" class="headerlink" title="方案："></a>方案：</h3><p>利用通知队列 <code>NSNotificationQueue </code> 在线程空余时 <code>NSPostWhenIdle </code> 去发送一个通知，在接收者那里执行相应的代码</p>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">inline void __onMainThreadAsync(void (^block)()) &#123;</span><br><span class="line">    if ([NSThread isMainThread]) &#123;</span><br><span class="line">        block();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), block);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inline void __onIdleThreadAsync(void (^block)()) &#123;</span><br><span class="line">    __onMainThreadAsync(^&#123;</span><br><span class="line">        CFUUIDRef uuidRef = CFUUIDCreate(NULL);</span><br><span class="line">        CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);</span><br><span class="line">        CFRelease(uuidRef);</span><br><span class="line">        NSString *uuidValue = (__bridge_transfer NSString *)uuidStringRef;</span><br><span class="line">        NSString *name = [NSString stringWithFormat:@&quot;EnqueueIdleThreadNotification_%@&quot;, uuidValue];</span><br><span class="line">        NSNotification *notification = [NSNotification notificationWithName:name object:nil];</span><br><span class="line">        NSNotificationCenter * __block center = [NSNotificationCenter defaultCenter];</span><br><span class="line">        id __block token = [center addObserverForName:name object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification * _Nonnull note) &#123;</span><br><span class="line">            block();</span><br><span class="line">            [center removeObserver:token];</span><br><span class="line">            token = nil;</span><br><span class="line">            center = nil;</span><br><span class="line">        &#125;];</span><br><span class="line">        [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostWhenIdle];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="适用场景："><a href="#适用场景：" class="headerlink" title="适用场景："></a>适用场景：</h3><p>比如app启动时一些第三方库的初始化工作，必须在主线程执行但又不能阻塞主线程当前执行的代码</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>1、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3012b863befb">深入思考NSNotification</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/uiwindow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/uiwindow/" class="post-title-link" itemprop="url">关于UIWindow</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 17:33:30 / 修改时间：17:35:14" itemprop="dateCreated datePublished" datetime="2022-12-30T17:33:30+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="iOS系统差异"><a href="#iOS系统差异" class="headerlink" title="iOS系统差异"></a>iOS系统差异</h3><p>app有多个 <code>window</code> 对象时，并且<code>keywindow</code> 不是根<code>window</code>时，一些第三方自定义键盘（不是搜狗那种第三方系统键盘类型）<br>iOS9、10：可以显示<br>iOS11、12：不可显示</p>
+<h3 id="根window"><a href="#根window" class="headerlink" title="根window"></a>根window</h3><p>app启动时创建的第一个window，亦可称为mainwindow<br>获取方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[UIApplication sharedApplication].delegate.window</span><br><span class="line">[UIApplication sharedApplication].windows.firstObject</span><br></pre></td></tr></table></figure>
+<p>以下两种获取方法不一定准确：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[UIApplication sharedApplication].keyWindow</span><br><span class="line">self.view.window  </span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义window"><a href="#自定义window" class="headerlink" title="自定义window"></a>自定义window</h3><p>显示出来的方法：<code>[myWindow makeKeyAndVisible]</code> 或者 <code>myWindow.hidden = NO</code><br>自定义window在hidden后，keywindow会自动重置为根window</p>
+<h3 id="系统alert"><a href="#系统alert" class="headerlink" title="系统alert"></a>系统alert</h3><p>系统alert弹出时，会新建一个window，同时设为key并显示，dismiss后，keywindow会自动重置为根window</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/iOS/encode_theory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon_az/logo.png">
+      <meta itemprop="name" content="andyzhen">
+      <meta itemprop="description" content="主业iOS开发，副业没想好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="andyzhen的小黑屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/30/iOS/encode_theory/" class="post-title-link" itemprop="url">常用的加解密算法原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-30 17:22:10 / 修改时间：20:32:46" itemprop="dateCreated datePublished" datetime="2022-12-30T17:22:10+08:00">2022-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h2><p><strong>经典算法：</strong></p>
+<ul>
+<li>DES 数据加密标准</li>
+<li>3DES 使用3个密钥，对消息进行（密钥1·加密）+（密钥2·解密）+（密钥3·加密）</li>
+<li>AES 高级加密标准</li>
+</ul>
+<p><strong>分组模式：主要有两种</strong></p>
+<ul>
+<li>ECB模式(又称电子密码本模式)<br>使用ECB模式加密的时候，相同的明文分组会被转换为相同的密文分组。<br>类似于一个巨大的明文分组 -&gt; 密文分组的对照表。</li>
+</ul>
+<p><img src="/images/iOS/encode_theory/01.jpg"></p>
+<p>  <strong>某一块分组被修改，不影响后面的加密结果</strong></p>
+<ul>
+<li>CBC模式(又称电子密码链条)<br>在CBC模式中，首先将明文分组与前一个密文分组进行XOR(异或)运算，然后再进行加密。<br>每一个分组的加密结果依赖需要与前一个进行异或运算，由于第一个分组没有前一个分组，所以需要提供一个初始向量iv</li>
+</ul>
+<p><img src="/images/iOS/encode_theory/02.jpg"></p>
+<p><strong>某一块分组被修改，影响后面的加密结果</strong></p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><p><strong>RSA算法原理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 求N，准备两个质数p和q,N = p x q</span><br><span class="line">* 求L,L是p-1和q-1的最小公倍数。L = lcm（p-1,q-1）</span><br><span class="line">* 求E，E和L的最大公约数为1（E和L互质）</span><br><span class="line">* 求D，E x D mode L = 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>RSA加密实践</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* p = 17,q = 19 =&gt;N = 323</span><br><span class="line">* lcm（p-1,q-1）=&gt;lcm（16，18）=&gt;L= 144</span><br><span class="line">* gcd（E,L）=1 =&gt;E=5</span><br><span class="line">* E乘以几可以mode L =1? D=29可以满足</span><br><span class="line">* 得到公钥为：E=5,N=323</span><br><span class="line">* 得到私钥为：D=29,N=323</span><br><span class="line">* 加密 明文的E次方 mod N = 123的5次方 mod 323 = 225（密文）</span><br><span class="line">* 解密 密文的D次方 mod N = 225的29次方 mod 323 = 123（明文）</span><br></pre></td></tr></table></figure>
+
+<p><strong>DH密钥交换算法</strong><br>迪菲－赫尔曼密钥交换（Diffie–Hellman key exchange，简称“D–H”） 是一种安全协议。<br>它可以让双方在完全没有对方任何预先信息的条件下通过不安全信道建立起一个密钥。这个密钥可以在后续的通讯中作为对称密钥来加密通讯内容。</p>
+<ul>
+<li>算法原理及证明过程如下：<br><img src="/images/iOS/encode_theory/03.jpg"><br>【注】DH算法也并不能避免中间人攻击，要想避免，还是得需要验证双方身份，即证书</li>
+</ul>
+<p><strong>相关demo</strong><br><a target="_blank" rel="noopener" href="https://github.com/aaszjp/RSADemo">RSADemo</a></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1]<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b44927161081">数据安全及各种加密算法对比</a><br>[2]<a target="_blank" rel="noopener" href="https://blog.csdn.net/fw0124/article/details/8462373">DH密钥交换算法</a><br>[3]<a target="_blank" rel="noopener" href="https://blog.csdn.net/dbs1215/article/details/48953589">带你彻底理解RSA算法原理</a><br>[4]<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014044812/article/details/80782448">RSA算法原理——（2）RSA简介及基础数论知识</a><br>[5]<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014044812/article/details/80866759">RSA算法原理——（3）RSA加解密过程及公式论证</a></p>
 
       
     </div>
@@ -346,6 +1158,9 @@
 
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -412,20 +1227,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
